@@ -28,6 +28,12 @@ class Reindeers
     #[ORM\Column(length: 255)]
     private ?string $file_name = null;
 
+    public function __construct()
+    {
+        $this->ceated_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTimeImmutable();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

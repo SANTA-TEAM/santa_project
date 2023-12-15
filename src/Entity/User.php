@@ -75,6 +75,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->messages = new ArrayCollection();
         $this->gifts = new ArrayCollection();
         $this->letters = new ArrayCollection();
+        $this->ceated_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTimeImmutable();
+    }
+
+    public function __toString(): string
+    {
+        return $this->last_name . ' ' . $this->first_name;
     }
 
     public function getId(): ?int

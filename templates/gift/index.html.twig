@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+  {# create a partial and use include with a for loop #}
+  {% for category in categories %}
+    <p>Catégorie : {{ category.name }}</p>
+  {% endfor %}
+  {% for age in ages %}
+    <p>Age : {{ age.age }}</p>
+  {% endfor %}
+  {% for gift in gifts %}
+    <p>Cadeau : {{ gift.name }}</p>
+    <p>Age : {{ gift.age }}</p>
+    <p>categorie : {{ gift.category }}</p>
+    {% for image in gift.getImages %}
+        <p><img src=" {{ asset('uploads/gifts ¬ image.file_name' )}}" alt="image de {{ gift.getName }}"></p>
+    {% endfor %}
+  {% endfor %}
+{% endblock %}

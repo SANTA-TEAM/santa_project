@@ -39,6 +39,9 @@ class Gift
     #[ORM\ManyToMany(targetEntity: Letter::class, mappedBy: 'gift')]
     private Collection $letters;
 
+    #[ORM\ManyToOne(inversedBy: 'gifts')]
+    private ?Category $category = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -177,6 +180,18 @@ class Gift
         if ($this->letters->removeElement($letter)) {
             $letter->removeGift($this);
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
 
         return $this;
     }

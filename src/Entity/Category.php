@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -21,6 +23,14 @@ class Category
 
     #[ORM\ManyToOne(inversedBy: 'categories')]
     private ?User $creator = null;
+
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Gift::class)]
+    private Collection $gifts;
+
+    public function __construct()
+    {
+        $this->gifts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -61,5 +71,39 @@ class Category
         $this->creator = $creator;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Gift>
+     */
+    public function getGifts(): Collection
+    {
+        return $this->gifts;
+    }
+
+    public function addGift(Gift $gift): static
+    {
+        if (!$this->gifts->contains($gift)) {
+            $this->gifts->add($gift);
+            $gift->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGift(Gift $gift): static
+    {
+        if ($this->gifts->removeElement($gift)) {
+            // set the owning side to null (unless already changed)
+            if ($gift->getCategory() === $this) {
+                $gift->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString(): string
+    {
+        return (string) $this->name;
     }
 }

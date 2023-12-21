@@ -21,6 +21,17 @@ class GiftRepository extends ServiceEntityRepository
         parent::__construct($registry, Gift::class);
     }
 
+
+    public function findGiftsWithImages() {
+
+        $qb = $this->createQueryBuilder('g')
+            ->leftJoin('g.images', 'i')
+            ->orderBy('g.id', 'DESC')
+            ->getQuery()
+            ->getResult();
+
+        return $qb;
+    }
 //    /**
 //     * @return Gift[] Returns an array of Gift objects
 //     */

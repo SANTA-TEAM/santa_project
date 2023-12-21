@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LetterController!{% endblock %}
+
+{% block body %}
+    <div>
+        {{form_start(formLetter)}}
+        {{form_widget(formLetter)}}
+        {{form_end(formLetter)}}
+    </div>
+{% endblock %}

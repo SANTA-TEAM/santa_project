@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Letter;
 use App\Form\LetterType;
+use App\Repository\CategoryRepository;
+use App\Repository\GiftRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +17,14 @@ class LetterController extends AbstractController
     #[Route('/letter', name: 'app_letter')]
     public function index(
         Request $request,
-        EntityManagerInterface $entityManagerInterface): Response
+        EntityManagerInterface $entityManagerInterface,
+        CategoryRepository $categoryRepository,
+        GiftRepository $giftRepository): Response
     {
+        $category = $categoryRepository->findAll();
+        $gift = $giftRepository->findAll();
+
+
         $letter = new Letter();
         $formLetter = $this->createForm(LetterType::class, $letter);
         $formLetter->handleRequest($request);
@@ -36,6 +44,7 @@ class LetterController extends AbstractController
 
             return $this->redirectToRoute('app_letter');
         }
+        dd($category, $gift);
         return $this->render('letter/index.html.twig', [
             'controller_name' => 'LetterController',
             'formLetter' => $formLetter->createView(),

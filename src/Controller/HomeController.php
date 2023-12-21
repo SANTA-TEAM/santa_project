@@ -18,7 +18,6 @@ class HomeController extends AbstractController
 
         $reindeers = $reindeersRepository->findAll();
         $comments = $commentRepository->findAll();
-        dd($reindeers, $comments);
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
             'reindeers' => $reindeers,

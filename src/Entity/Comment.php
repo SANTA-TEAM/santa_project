@@ -20,7 +20,7 @@ class Comment
     private ?string $user_name = null;
 
     #[ORM\Column(nullable: true)]
-    private ?bool $is_valid = null;
+    private ?bool $is_valid = false;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     private ?User $validator = null;

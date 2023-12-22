@@ -29,6 +29,7 @@ class Letter
     private ?\DateTimeImmutable $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'letters')]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: 'id', onDelete: 'CASCADE')]
     private ?User $writer = null;
 
     #[ORM\ManyToMany(targetEntity: Gift::class, inversedBy: 'letters')]
@@ -128,5 +129,9 @@ class Letter
         $this->gift->removeElement($gift);
 
         return $this;
+    }
+    public function __toString(): string
+    {
+        return $this->$this->title;
     }
 }

@@ -21,6 +21,7 @@ class Message
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'messages')]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: 'id', onDelete: 'CASCADE')]
     private ?User $writer = null;
 
     public function getId(): ?int
@@ -62,5 +63,10 @@ class Message
         $this->writer = $writer;
 
         return $this;
+    }
+    
+    public function __toString(): string
+    {
+        return $this->id;
     }
 }

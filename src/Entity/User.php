@@ -47,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $age = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $ceated_at = null;
+    private ?\DateTimeImmutable $created_at = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $updated_at = null;
@@ -77,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->messages = new ArrayCollection();
         $this->gifts = new ArrayCollection();
         $this->letters = new ArrayCollection();
-        $this->ceated_at = new \DateTimeImmutable();
+        $this->created_at = new \DateTimeImmutable();
         $this->updated_at = new \DateTimeImmutable();
     }
 
@@ -216,14 +216,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCeatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTimeImmutable
     {
-        return $this->ceated_at;
+        return $this->created_at;
     }
 
-    public function setCeatedAt(\DateTimeImmutable $ceated_at): static
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
     {
-        $this->ceated_at = $ceated_at;
+        $this->created_at = $created_at;
 
         return $this;
     }

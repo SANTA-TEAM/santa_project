@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -80,6 +81,6 @@ class UserCrudController extends AbstractCrudController
         ])->allowMultipleChoices();
         yield TextField::new('first_name', 'Prénom');
         yield TextField::new('last_name', 'Nom');
-        yield TextField::new('age', 'Age');
+        yield NumberField::new('age', 'Age');
     }
 }

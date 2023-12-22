@@ -25,6 +25,7 @@ class Address
     private ?City $city = null;
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false, referencedColumnName: 'id', onDelete: 'CASCADE')]
     private Collection $child;
 
     public function __construct()

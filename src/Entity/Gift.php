@@ -195,4 +195,9 @@ class Gift
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->$this->name;
+    }
 }

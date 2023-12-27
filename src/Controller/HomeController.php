@@ -27,7 +27,7 @@ class HomeController extends AbstractController
         foreach ($users as $user) {
             if ($user->getRoles() === ['ROLE_USER']) {
                 if ($user->getCreatedAt() > new \DateTime($time)) {
-                    $userRepository->remove($user);
+                    $userRepository->removeUser($user);
                 }
             }
         }

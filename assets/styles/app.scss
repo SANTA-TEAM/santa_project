@@ -1,1 +1,121 @@
 @import "~bootstrap/scss/bootstrap";
+$gold: #FFD700;
+
+* {
+  text-decoration: none!important;
+
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+main {
+  flex: 1;
+  background: red!important;
+}
+
+.text-gold {
+  color: $gold;
+}
+
+.bg-gold {
+  background-color: $gold;
+}
+
+
+#countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tag {
+  z-index: 3;
+  width: 100px;
+  padding: 30px;
+  border-radius: 10px;
+  background: $secondary;
+  color: $gold;
+  text-align: center;
+}
+
+.value {
+  display: block;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+
+
+// ------------------------------------------------------------------------ snow
+.snow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.paillettes {
+  position: absolute;
+  z-index: 2;
+  bottom: -100%;
+  left: 50%;
+  height: 1000px;
+  animation: fall 10s linear infinite;
+  transform: translateX(-50%);
+  color: antiquewhite;
+
+}
+
+.snow__layer {
+  position: absolute;
+  z-index: 1;
+  left: -100px;
+  right: -100px;
+  animation: wind 5s cubic-bezier(.64, -0.02, .38, .95) infinite alternate;
+  perspective: 100px;
+}
+
+
+.snow__layer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2000px;
+  // background: url(neige4.jpg);
+  animation: falllight 20s linear infinite;
+  transform: translateZ(50px);
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-1000px);
+  }
+}
+
+@keyframes falllight {
+  from {
+    transform: translateY(-1000px) translateZ(50px);
+  }
+}
+
+@keyframes wind {
+  to {
+    transform: translateX(50px);
+  }
+}
+// -------------------------------------------------------------------- end snow

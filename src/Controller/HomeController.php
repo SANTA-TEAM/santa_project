@@ -2,12 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
+use App\Form\CommentType;
+use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ReindeersRepository;
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class HomeController extends AbstractController
 {
@@ -15,7 +18,8 @@ class HomeController extends AbstractController
     public function index(
         ReindeersRepository $reindeersRepository,
         UserRepository $userRepository,
-        CommentRepository $commentRepository
+        CommentRepository $commentRepository,
+        Request $request
     ): Response {
 
 
@@ -31,13 +35,26 @@ class HomeController extends AbstractController
                 }
             }
         }
-        
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            $commentRepository->save($comment);
+
+            $this->addFlash('success', 'Commentaire ajouté !');
+            return $this->redirectToRoute('app_home');
+        }
+
+
         $reindeers = $reindeersRepository->findAll();
         $comments = $commentRepository->findAll();
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
             'reindeers' => $reindeers,
-            'comments' => $comments
+            'comments' => $comments,
+            'form' => $form->createView(),
         ]);
     }
 }

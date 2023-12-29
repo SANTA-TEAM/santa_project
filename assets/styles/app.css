@@ -11976,15 +11976,66 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+@font-face {
+  font-family: "Licorice";
+  src: url("fonts/Licorice/Licorice-Regular.ttf");
+}
+@font-face {
+  font-family: "Krub";
+  src: url("fonts/Krub/Krub-Regular.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Krub";
+  src: url("fonts/Krub/Krub-Regular.ttf");
+  font-style: normal;
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Krub";
+  src: url("fonts/Krub/Krub-Bold.ttf");
+  font-style: normal;
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Krub";
+  src: url("fonts/Krub/Krub-Italic.ttf");
+  font-style: italic;
+  font-weight: normal;
+}
 * {
   text-decoration: none !important;
+  font-family: "Krub", sans-serif;
+}
+
+.handwrite,
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+h1 > *,
+.h1 > * {
+  font-family: "Licorice", sans-serif;
+}
+
+p {
+  line-height: 2.5em;
 }
 
 body {
   font-family: "Inter", sans-serif;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 main {
@@ -12082,4 +12133,51 @@ main {
   to {
     transform: translateX(50px);
   }
+}
+form textarea:focus,
+form input:focus {
+  outline: #FFD700 solid 10px;
+  box-shadow: 0 0 0.5em 0.2em #FFD700 !important;
+  border-color: transparent;
+}
+form button[type=submit] {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+a.CTA-rounded {
+  background: white;
+  display: inline-flex;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow 0.25s ease-in-out;
+}
+a.CTA-rounded:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.25s ease-in-out;
+}
+
+.nav-link {
+  transition: color 0.25s ease-in-out;
+}
+
+.nav-item:hover .nav-link {
+  color: #ED2626 !important;
+  transition: color 0.25s ease-in-out;
+}
+
+.glow {
+  color: white;
+  text-shadow: 0 0 20px #FFD700;
+  stroke: #FFD700 1px solid;
+}
+
+.reindeers {
+  box-shadow: 0 0 20px #FFD700;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
 }/*# sourceMappingURL=app.css.map */

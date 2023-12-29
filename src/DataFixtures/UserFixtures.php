@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Message;
 use Faker\Factory;
 use App\Entity\User;
 use Doctrine\Persistence\ObjectManager;
@@ -54,6 +55,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
             $address = $this->getReference('address_' . rand(0, 19));
             $user->setAddress($address);
+            $this->addReference('user_' . $i, $user);
 
 
             $manager->persist($user);

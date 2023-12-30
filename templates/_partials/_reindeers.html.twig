@@ -2,13 +2,11 @@
   <div class="carousel-inner h-100">
     {% for reindeer in reindeers %}
       <div class="h-100 col-12 col-md-6 col-lg-4 z-1 p-2 carousel-item {% if reindeer.name == 'Rudolph' %}active{% endif %}">
-        {# <div class="position-relative p-3 h-100"> #}
-          <img src="{{ asset('uploads/reindeers/' ~ reindeer.getFileName) }}" alt="photot de {{ reindeer.name }}" class="w-100 h-100 top-0 start-0 z-n1 w-100 h-100 object-fit-cover" />
-          <div class="text-start text-white carousel-caption d-none d-md-block w-50">
-            <h3>{{ reindeer.name }}</h3>
-            <p>{{ reindeer.story }}</p>
-          </div>
-        {# </div> #}
+        <img src="{{ asset('uploads/reindeers/' ~ reindeer.getFileName) }}" alt="photot de {{ reindeer.name }}" class="w-100 h-100 top-0 start-0 z-n1 w-100 h-100 object-fit-cover" />
+        <div class="text-start text-white carousel-caption d-none d-md-block w-50">
+          <h3 class="fs-1 fw-bold glow">{{ reindeer.name }}</h3>
+          <p>{{ reindeer.story }}</p>
+        </div>
       </div>
     {% endfor %}
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselReindeers" data-bs-slide="prev">
@@ -20,3 +18,4 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
+</div>

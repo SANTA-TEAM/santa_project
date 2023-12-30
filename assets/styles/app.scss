@@ -1,1 +1,199 @@
 @import "~bootstrap/scss/bootstrap";
+@import 'fonts.scss';
+$gold: #FFD700;
+
+* {
+  text-decoration: none !important;
+  font-family: "Krub", sans-serif;
+}
+
+.handwrite,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h1>* {
+  font-family: "Licorice", sans-serif;
+}
+
+p {
+  line-height: 2.5em;
+}
+
+
+body {
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  background: red !important;
+  // overflow-y: scroll;
+}
+
+.text-gold {
+  color: $gold;
+}
+
+.bg-gold {
+  background-color: $gold;
+}
+
+
+#countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tag {
+  z-index: 3;
+  width: 100px;
+  padding: 30px;
+  border-radius: 10px;
+  background: $secondary;
+  color: $gold;
+  text-align: center;
+}
+
+.value {
+  display: block;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.label {
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+
+
+// ------------------------------------------------------------------------ snow
+.snow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.paillettes {
+  position: absolute;
+  z-index: 2;
+  bottom: -100%;
+  left: 50%;
+  height: 1000px;
+  animation: fall 10s linear infinite;
+  transform: translateX(-50%);
+  color: antiquewhite;
+
+}
+
+.snow__layer {
+  position: absolute;
+  z-index: 1;
+  left: -100px;
+  right: -100px;
+  animation: wind 5s cubic-bezier(.64, -0.02, .38, .95) infinite alternate;
+  perspective: 100px;
+}
+
+
+.snow__layer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2000px;
+  // background: url(neige4.jpg);
+  animation: falllight 20s linear infinite;
+  transform: translateZ(50px);
+}
+
+@keyframes fall {
+  from {
+    transform: translateY(-1000px);
+  }
+}
+
+@keyframes falllight {
+  from {
+    transform: translateY(-1000px) translateZ(50px);
+  }
+}
+
+@keyframes wind {
+  to {
+    transform: translateX(50px);
+  }
+}
+
+// -------------------------------------------------------------------- end snow
+
+
+
+
+form {
+
+  textarea:focus,
+  input:focus {
+    outline: $gold solid 10px;
+    box-shadow: 0 0 0.5em 0.2em $gold !important;
+    border-color: transparent;
+  }
+
+  button[type="submit"] {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .7);
+  }
+}
+
+a.CTA-rounded {
+  background: white;
+  display: inline-flex;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  transition: box-shadow .25s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .7);
+    transition: box-shadow .25s ease-in-out;
+  }
+}
+
+.nav-link {
+  transition: color .25s ease-in-out;
+}
+
+.nav-item:hover .nav-link {
+  color: $secondary !important;
+  transition: color .25s ease-in-out;
+}
+
+
+.glow {
+  color: white;
+  text-shadow: 0 0 20px $gold;
+  stroke: $gold 1px solid;
+}
+
+.reindeers {
+  box-shadow: 0 0 20px $gold;
+}
+
+.navbar-toggler {
+  &:focus {
+    box-shadow: none;
+  }
+}

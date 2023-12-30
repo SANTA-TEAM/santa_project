@@ -8,7 +8,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
-class MessageFixtures extends Fixture 
+class MessageFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
@@ -17,7 +17,8 @@ class MessageFixtures extends Fixture
         for ($i = 0; $i < 10; ++$i) {
             $message = (new Message())
             ->setTitle($faker->sentence(6))
-            ->setContent($faker->paragraph(2));
+            ->setContent($faker->paragraph(2))
+            ->setWriter($this->getReference('user_' . rand(0, 2)));
             $manager->persist($message);
         }
         
@@ -25,5 +26,12 @@ class MessageFixtures extends Fixture
         $manager->persist($message);
 
         $manager->flush();
+    }
+
+    public function getDependencies(): array
+    {
+        return [
+            UserFixtures::class,
+        ];
     }
 }

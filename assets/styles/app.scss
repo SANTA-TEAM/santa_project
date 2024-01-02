@@ -144,6 +144,7 @@ main {
 
 form {
 
+  select:focus,
   textarea:focus,
   input:focus {
     outline: $gold solid 10px;

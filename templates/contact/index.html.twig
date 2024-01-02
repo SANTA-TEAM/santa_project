@@ -1,10 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!{% endblock %}
+{% block title %}
+  Hello ContactController!
+{% endblock %}
 
-{% block body %}
-<div class="container">
-    {{ form_start(form) }}
-    {{ form_widget(form) }}   
-</div>
+{% block main %}
+  <section class="py-5">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center fs-1 glow">Envoyer un message au Père Noël</h2>
+            {{ form_start(form) }}
+            {{ form_row(form.title) }}
+            {{ form_row(form.writer) }}
+            {{ form_row(form.content) }}
+            {{ form_end(form) }}
+        </div>
+      </div>
+  </section>
 {% endblock %}

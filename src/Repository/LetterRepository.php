@@ -21,6 +21,11 @@ class LetterRepository extends ServiceEntityRepository
         parent::__construct($registry, Letter::class);
     }
 
+    public function save($letter) {
+        $this->_em->persist($letter);
+        $this->_em->flush();
+    }
+
 //    /**
 //     * @return Letter[] Returns an array of Letter objects
 //     */

@@ -12134,6 +12134,7 @@ main {
     transform: translateX(50px);
   }
 }
+form select:focus,
 form textarea:focus,
 form input:focus {
   outline: #FFD700 solid 10px;

@@ -12,9 +12,10 @@ class AgeFixtures extends Fixture
     {
         $ages= [3, 7, 12, 16, 18];
 
-        foreach ($ages as $age) {
+        foreach ($ages as $key => $age) {
             $age = (new Age())
                 ->setAge($age);
+        $this->addReference('age_' . $key, $age);
             $manager->persist($age);
         }
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Letter;
 use App\Entity\Age;
 use App\Entity\Category;
 use App\Form\GiftFilterType;
@@ -13,8 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class GiftController extends AbstractController
 {
@@ -72,7 +72,7 @@ class GiftController extends AbstractController
         $category = $category === null ? null : $categoryRepository->findOneBy(['id' => $category]);
 
         $gifts = $giftRepository->filter($age, $category, $order);
-        
+
         $giftsArray = [];
         foreach ($gifts as $gift) {
             $giftsArray[] = [
@@ -84,9 +84,42 @@ class GiftController extends AbstractController
                 'images' => $gift->getImages()
             ];
         }
-        
+
         $response = new JsonResponse($giftsArray);
 
         return $response;
+    }
+
+    #[Route('/cadeau/{slug}', name: 'app_gift_detail', methods: ['GET'])]
+    public function detail(
+        GiftRepository $giftRepository,
+        string $slug
+    ): Response {
+        $gift = $giftRepository->findOneBy(['slug' => $slug]);
+
+        return $this->render('gift/detail.html.twig', [
+            'gift' => $gift
+        ]);
+    }
+
+    #[Route('/cadeau/ajouter-a-ma-lettre/{slug}', name: 'app_gift_add_to_letter', methods: ['GET'])]
+    public function addToLetter(
+        GiftRepository $giftRepository,
+        string $slug,
+        SessionInterface $session
+    ): Response {
+
+        $gift = $giftRepository->findOneBy(['slug' => $slug]);
+
+        $letter = $session->get('letter');
+        if (!$letter) {
+            $letter = new Letter();
+        }
+        $letter->addGift($gift);
+
+        $session->set('letter', $letter);
+
+        $this->addFlash('success', 'Le cadeau a bien été ajouté à votre lettre');
+        return $this->redirectToRoute('app_gift');
     }
 }

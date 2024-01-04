@@ -12159,6 +12159,20 @@ a.CTA-rounded:hover {
   transition: box-shadow 0.25s ease-in-out;
 }
 
+a.CTA {
+  background: white;
+  display: inline-flex;
+  border-radius: 2em;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 3px 1px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.25s ease-in-out;
+}
+a.CTA:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.7);
+  transition: box-shadow 0.25s ease-in-out;
+}
+
 .nav-link {
   transition: color 0.25s ease-in-out;
 }

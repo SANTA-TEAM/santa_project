@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class LetterController extends AbstractController
 {
@@ -19,35 +20,41 @@ class LetterController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManagerInterface,
         CategoryRepository $categoryRepository,
-        GiftRepository $giftRepository): Response
+        GiftRepository $giftRepository,
+        SessionInterface $session
+        ): Response
     {
+
+        $letter = $session->get('letter');
+
+        if (!$letter) {
+            $letter = new Letter();
+        }
+
         $category = $categoryRepository->findAll();
         $gift = $giftRepository->findAll();
 
+        // $formLetter = $this->createForm(LetterType::class, $letter);
+        // $formLetter->handleRequest($request);
 
-        $letter = new Letter();
-        $formLetter = $this->createForm(LetterType::class, $letter);
-        $formLetter->handleRequest($request);
+        // if ($formLetter->isSubmitted() && $formLetter->isValid()) {
+        //     $letter = $formLetter->getData();
+        //     $user = $letter->getWriter();
+        //     $address = $user->getAddress();
+        //     foreach ($letter->getGift() as $gift) {
+        //         $gift->addLetter($letter);
+        //     }
 
-        if ($formLetter->isSubmitted() && $formLetter->isValid()) {
-            $letter = $formLetter->getData();
-            $user = $letter->getWriter();
-            $address = $user->getAddress();
-            foreach ($letter->getGift() as $gift) {
-                $gift->addLetter($letter);
-            }
+        //     $entityManagerInterface->persist($user);
+        //     $entityManagerInterface->persist($address);
+        //     $entityManagerInterface->persist($letter);
+        //     $entityManagerInterface->flush();
 
-            $entityManagerInterface->persist($user);
-            $entityManagerInterface->persist($address);
-            $entityManagerInterface->persist($letter);
-            $entityManagerInterface->flush();
-
-            return $this->redirectToRoute('app_letter');
-        }
-        dd($category, $gift);
+        //     return $this->redirectToRoute('app_letter');
+        // }
+        dd($letter);
         return $this->render('letter/index.html.twig', [
-            'controller_name' => 'LetterController',
-            'formLetter' => $formLetter->createView(),
+            // 'formLetter' => $formLetter->createView(),
         ]);
     }
 }

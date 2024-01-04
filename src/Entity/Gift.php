@@ -42,6 +42,9 @@ class Gift
     #[ORM\ManyToOne(inversedBy: 'gifts')]
     private ?Category $category = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -199,5 +202,17 @@ class Gift
     public function __toString(): string
     {
         return $this->$this->name;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

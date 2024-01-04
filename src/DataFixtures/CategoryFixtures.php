@@ -27,10 +27,13 @@ class CategoryFixtures extends Fixture
             "Jeux Créatifs"
         ];
 
-        foreach ($category as $name) {
+        foreach ($category as $key => $name) {
             $category = (new Category())
                 ->setName($name)
                 ->setDescription($faker->text(200));
+
+            $this->addReference('category_' . $key, $category);
+
             $manager->persist($category);
         }
 

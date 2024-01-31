@@ -24,8 +24,10 @@
           {% for gift in gifts %}
             <a class="d-inline-block p-2 col-6 col-md-4 " href="{{ path('app_gift_detail', {slug: gift.slug }) }}">
                 <div style="height: 200px;" class="position-relative rounded-2 overflow-hidden">
-                  {# <img class="position-absolute" src="{{ asset('/uploads/gifts/' ~ gift.images|first) }}" alt="photo de {{ gift.name }}"> #}
-                  <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="{{ asset('/uploads/reindeers/0c783d4036aabf5952329468830bd63b.png') }}" alt="photo de {{ gift.name }}" />
+
+                  
+                <img class="position-absolute" src="{{ asset('/uploads/gifts/' ~ gift.images|first) }}" alt="photo de {{ gift.name }}">
+                  {# <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="{{ asset('/uploads/reindeers/0c783d4036aabf5952329468830bd63b.png') }}" alt="photo de {{ gift.name }}" /> #}
     
                   <h3 class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-25 text-white px-3 py-1 mt-5 mb-0">{{ gift.name }}</h3>
                 </div>

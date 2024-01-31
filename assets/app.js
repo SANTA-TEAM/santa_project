@@ -17,6 +17,8 @@ const idOrder = document.getElementById('gift_filter_order');
 const idAge = document.getElementById('gift_filter_age');
 const idCat = document.getElementById('gift_filter_category');
 
+const giftContainer = document.getElementById('gift-list');
+const removeButton = document.querySelectorAll('.remove-gift');
 
 
 fields.forEach((field) => {
@@ -56,7 +58,7 @@ fields.forEach((field) => {
         for (data of datas) {
           console.log(data);
           let html = document.createElement('div');
-          html.classList.add('p-2', 'col-6' , 'col-md-4');
+          html.classList.add('p-2', 'col-6', 'col-md-4');
           html.innerHTML = `
 
               <div style="height: 200px;" class="position-relative rounded-1">
@@ -70,8 +72,32 @@ fields.forEach((field) => {
       .catch((err) => {
         console.log(err);
       });
-
-
   });
+})
+
+console.log(giftContainer);
+
+
+removeButton.forEach((button) => {
+  button.addEventListener('click', () => {
+    const url = '/lettre/cadeaux/supprimer/' + button.id;
+
+    console.log(url);
+
+    const updateGift = fetch(url, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((datas) => {
+        button.parentElement.remove();
+      })
+      .then(() => { removeButton = document.querySelectorAll('.remove-gift') })
+  })
 
 })

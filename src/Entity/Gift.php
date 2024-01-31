@@ -33,7 +33,7 @@ class Gift
     #[ORM\ManyToOne(inversedBy: 'gifts')]
     private ?User $creator = null;
 
-    #[ORM\OneToMany(mappedBy: 'gift', targetEntity: Image::class)]
+    #[ORM\OneToMany(mappedBy: 'gift', targetEntity: Image::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $images;
 
     #[ORM\ManyToMany(targetEntity: Letter::class, mappedBy: 'gift')]

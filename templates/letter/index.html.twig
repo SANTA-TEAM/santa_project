@@ -10,7 +10,7 @@
         {{ form_row(form.writer) }}
 
         <div id="gift-list">
-          {% for gift in letter.gift %}
+          {% for gift in gifts %}
             {% include '_partials/_gitfLetter.html.twig' %}
           {% endfor %}
         </div>

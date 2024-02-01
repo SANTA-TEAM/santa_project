@@ -21,7 +21,7 @@ class Gift
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'gifts')]
+    #[ORM\ManyToOne(inversedBy: 'gifts', fetch:'EAGER', cascade: ['persist', 'remove'])]
     private ?Age $age = null;
 
     #[ORM\Column]
@@ -33,13 +33,13 @@ class Gift
     #[ORM\ManyToOne(inversedBy: 'gifts')]
     private ?User $creator = null;
 
-    #[ORM\OneToMany(mappedBy: 'gift', targetEntity: Image::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'gift', targetEntity: Image::class, cascade: ['persist', 'remove'], orphanRemoval: true, fetch:'EAGER')]
     private Collection $images;
 
-    #[ORM\ManyToMany(targetEntity: Letter::class, mappedBy: 'gift')]
+    #[ORM\ManyToMany(targetEntity: Letter::class, mappedBy: 'gift', cascade: ['persist'])]
     private Collection $letters;
 
-    #[ORM\ManyToOne(inversedBy: 'gifts')]
+    #[ORM\ManyToOne(inversedBy: 'gifts', fetch:'EAGER', cascade: ['persist', 'remove'])]
     private ?Category $category = null;
 
     #[ORM\Column(length: 255)]
@@ -201,7 +201,7 @@ class Gift
 
     public function __toString(): string
     {
-        return $this->$this->name;
+        return $this->name;
     }
 
     public function getSlug(): ?string

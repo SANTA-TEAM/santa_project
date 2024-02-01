@@ -18,7 +18,7 @@ const idAge = document.getElementById('gift_filter_age');
 const idCat = document.getElementById('gift_filter_category');
 
 const giftContainer = document.getElementById('gift-list');
-const removeButton = document.querySelectorAll('.remove-gift');
+let removeButton = document.querySelectorAll('.remove-gift');
 
 
 fields.forEach((field) => {
@@ -75,29 +75,39 @@ fields.forEach((field) => {
   });
 })
 
-console.log(giftContainer);
-
-
-removeButton.forEach((button) => {
-  button.addEventListener('click', () => {
-    const url = '/lettre/cadeaux/supprimer/' + button.id;
-
+removeButton.forEach((clickedButton) => {
+  clickedButton.addEventListener('click', () => {
+    const url = '/letter';
     console.log(url);
+    let cart = [];
+
+    const body = {};
+
+    removeButton.forEach((button, index) => {
+      if (button.id !== clickedButton.id) {
+        cart.push(button.id)
+        body[index] = button.id
+      }
+    })
 
     const updateGift = fetch(url, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-      }
+      },
+      body: JSON.stringify(body)
     })
       .then((res) => {
         console.log(res);
         return res.json();
       })
       .then((datas) => {
-        button.parentElement.remove();
+        console.log(datas)
+        clickedButton.parentElement.remove();
       })
-      .then(() => { removeButton = document.querySelectorAll('.remove-gift') })
+      .then(() => { 
+        removeButton = document.querySelectorAll('.remove-gift') 
+        console.log(removeButton)
+      })
   })
-
 })

@@ -24,7 +24,7 @@ class Address
     #[ORM\ManyToOne(inversedBy: 'addresses')]
     private ?City $city = null;
 
-    #[ORM\OneToMany(mappedBy: 'address', targetEntity: User::class)]
+    #[ORM\OneToMany(mappedBy: 'address', targetEntity: User::class, cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false, referencedColumnName: 'id', onDelete: 'CASCADE')]
     private Collection $child;
 

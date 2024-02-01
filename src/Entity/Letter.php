@@ -32,7 +32,7 @@ class Letter
     #[ORM\JoinColumn(nullable: false, referencedColumnName: 'id', onDelete: 'CASCADE')]
     private ?User $writer = null;
 
-    #[ORM\ManyToMany(targetEntity: Gift::class, inversedBy: 'letters')]
+    #[ORM\ManyToMany(targetEntity: Gift::class, inversedBy: 'letters', cascade:['persist'])]
     private Collection $gift;
 
     public function __construct()
@@ -132,6 +132,6 @@ class Letter
     }
     public function __toString(): string
     {
-        return $this->$this->title;
+        return $this->title;
     }
 }

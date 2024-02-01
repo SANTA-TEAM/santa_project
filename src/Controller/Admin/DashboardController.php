@@ -27,7 +27,7 @@ class DashboardController extends AbstractDashboardController
 
     public function configureDashboard(): Dashboard
     {
-        return Dashboard::new ()
+        return Dashboard::new()
             ->setTitle('Santa Project');
     }
 
@@ -37,15 +37,15 @@ class DashboardController extends AbstractDashboardController
         // access only Santa user
         // if ($this->isGranted('ROLE_ADMIN'))
         // {
-            yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
+        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
         // }
-        yield MenuItem::linkToCrud('Rennes', 'fas fa-horse', Reindeers::class);
-        yield MenuItem::linkToCrud('Departements', 'fas fa-map', Department::class);
-        yield MenuItem::linkToCrud('Ville', 'fas fa-city', City::class);
-        yield MenuItem::linkToCrud('Cadeaux', 'fas fa-gift', Gift::class);
-        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
         yield MenuItem::linkToCrud('Lettres', 'fas fa-envelope', Letter::class);
-        yield MenuItem::linkToCrud('Categories', 'fas fa-layer-group', Category::class);
         yield MenuItem::linkToCrud('Messagerie', 'fas fa-comment', Message::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
+        yield MenuItem::linkToCrud('Cadeaux', 'fas fa-gift', Gift::class);
+        yield MenuItem::linkToCrud('Ville', 'fas fa-city', City::class);
+        yield MenuItem::linkToCrud('Departements', 'fas fa-map', Department::class);
+        yield MenuItem::linkToCrud('Categories', 'fas fa-layer-group', Category::class);
+        yield MenuItem::linkToCrud('Rennes', 'fas fa-horse', Reindeers::class);
     }
 }

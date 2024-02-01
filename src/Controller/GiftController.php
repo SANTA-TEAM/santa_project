@@ -113,11 +113,11 @@ class GiftController extends AbstractController
 
         $letter = $session->get('letter');
         if (!$letter) {
-            $letter = new Letter();
+            $letter = [];
         }
-        $letter->addGift($gift);
-
+        $letter [] = $gift->getId();
         $session->set('letter', $letter);
+
 
         $this->addFlash('success', 'Le cadeau a bien été ajouté à votre lettre');
         return $this->redirectToRoute('app_gift');

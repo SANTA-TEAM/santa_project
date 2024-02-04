@@ -61,24 +61,24 @@ class AddressType extends AbstractType
                 return;
             }
             
-            $department = $address->getDepartment();
+            // $department = $address->getDepartment();
 
-            if ($department) {
-                $form->add('city', EntityType::class, [
-                    'label' => 'Ville',
-                    'class' => City::class,
-                    'choice_label' => 'name',
-                    'attr' => [
-                        'class' => 'form-control m-2',
-                    ],
-                    'query_builder' => function ($city) use ($department) {
-                        return $city->createQueryBuilder('c')
-                            ->where('c.department = :department')
-                            ->setParameter('department', $department->getAddress()->getDepartment());
-                    },
-                    'mapped' => false,
-                ]);
-            }
+            // if ($department) {
+            //     $form->add('city', EntityType::class, [
+            //         'label' => 'Ville',
+            //         'class' => City::class,
+            //         'choice_label' => 'name',
+            //         'attr' => [
+            //             'class' => 'form-control m-2',
+            //         ],
+            //         'query_builder' => function ($city) use ($department) {
+            //             return $city->createQueryBuilder('c')
+            //                 ->where('c.department = :department')
+            //                 ->setParameter('department', $department->getAddress()->getDepartment());
+            //         },
+            //         'mapped' => false,
+            //     ]);
+            // }
         });
     }
 

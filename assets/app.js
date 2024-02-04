@@ -17,6 +17,8 @@ const idOrder = document.getElementById('gift_filter_order');
 const idAge = document.getElementById('gift_filter_age');
 const idCat = document.getElementById('gift_filter_category');
 
+const giftContainer = document.getElementById('gift-list');
+let removeButton = document.querySelectorAll('.remove-gift');
 
 
 fields.forEach((field) => {
@@ -56,7 +58,7 @@ fields.forEach((field) => {
         for (data of datas) {
           console.log(data);
           let html = document.createElement('div');
-          html.classList.add('p-2', 'col-6' , 'col-md-4');
+          html.classList.add('p-2', 'col-6', 'col-md-4');
           html.innerHTML = `
 
               <div style="height: 200px;" class="position-relative rounded-1">
@@ -70,8 +72,42 @@ fields.forEach((field) => {
       .catch((err) => {
         console.log(err);
       });
-
-
   });
+})
 
+removeButton.forEach((clickedButton) => {
+  clickedButton.addEventListener('click', () => {
+    const url = '/letter';
+    console.log(url);
+    let cart = [];
+
+    const body = {};
+
+    removeButton.forEach((button, index) => {
+      if (button.id !== clickedButton.id) {
+        cart.push(button.id)
+        body[index] = button.id
+      }
+    })
+
+    const updateGift = fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((datas) => {
+        console.log(datas)
+        clickedButton.parentElement.remove();
+      })
+      .then(() => { 
+        removeButton = document.querySelectorAll('.remove-gift') 
+        console.log(removeButton)
+      })
+  })
 })

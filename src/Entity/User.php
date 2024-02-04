@@ -55,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Category::class)]
     private Collection $categories;
 
-    #[ORM\ManyToOne(inversedBy: 'child')]
+    #[ORM\ManyToOne(inversedBy: 'child', cascade: ['persist'])]
     private ?Address $address = null;
 
     #[ORM\OneToMany(mappedBy: 'validator', targetEntity: Comment::class)]
@@ -67,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Gift::class)]
     private Collection $gifts;
 
-    #[ORM\OneToMany(mappedBy: 'writer', targetEntity: Letter::class)]
+    #[ORM\OneToMany(mappedBy: 'writer', targetEntity: Letter::class, cascade: ['persist'])]
     private Collection $letters;
 
     public function __construct()

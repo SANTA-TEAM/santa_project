@@ -1,11 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LetterController!{% endblock %}
+{% block main %}
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.text) }}
+        {{ form_row(form.writer) }}
 
-{% block body %}
-    <div>
-        {{form_start(formLetter)}}
-        {{form_widget(formLetter)}}
-        {{form_end(formLetter)}}
+        <div id="gift-list">
+          {% for gift in gifts %}
+            {% include '_partials/_gitfLetter.html.twig' %}
+          {% endfor %}
+        </div>
+        {{ form_end(form) }}
+      </div>
     </div>
+  </section>
 {% endblock %}

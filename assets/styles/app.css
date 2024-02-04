@@ -12194,4 +12194,25 @@ a.CTA:hover {
 
 .navbar-toggler:focus {
   box-shadow: none;
+}
+
+.snow {
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  background: white;
+  border-radius: 50%;
+  z-index: 10000;
+  animation: snowflake 5s linear forwards;
+}
+
+@keyframes snowflake {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 100vh;
+  }
 }/*# sourceMappingURL=app.css.map */

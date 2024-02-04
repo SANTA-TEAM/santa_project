@@ -7,7 +7,7 @@
         {# create a partial and use include with a for loop #}
         <h2 class="glow fs-1 text-center">La chambre aux cadeaux</h2>
 
-        {{ form_start(form, {attr: {class: 'row d-flex justify-content-between', id: 'giftForm'} }) }}
+        {{ form_start(form, { attr: { class: 'row d-flex justify-content-between', id: 'giftForm' } }) }}
         <fieldset class="col-6 col-md-4">
           <legend class="fs-5">Filtres</legend>
           {{ form_widget(form.age) }}
@@ -17,20 +17,24 @@
           <legend class="fs-5 text-end">Trier par</legend>
           {{ form_widget(form.order) }}
           <a class="fs-6 w-100 d-inline-block text-end" href="{{ path('app_gift') }}">Réinitialiser</a>
-          </fieldset>
+        </fieldset>
         {{ form_end(form) }}
 
         <div id="giftList" class="row p-1 m-0">
           {% for gift in gifts %}
-            <a class="d-inline-block p-2 col-6 col-md-4 " href="{{ path('app_gift_detail', {slug: gift.slug }) }}">
-                <div style="height: 200px;" class="position-relative rounded-2 overflow-hidden">
+            <a class="d-inline-block p-2 col-6 col-md-4" href="{{ path('app_gift_detail', { slug: gift.slug }) }}">
+              <div style="height: 200px;" class="position-relative rounded-2 overflow-hidden">
+                {% if gift.images is not empty %}
+                  <img class="position-absolute" src="{{ asset('/uploads/gifts/' ~ (gift.images|first)) }}" alt="photo de {{ gift.name }}" />
+                {% else %}
 
-                  
-                <img class="position-absolute" src="{{ asset('/uploads/gifts/' ~ gift.images|first) }}" alt="photo de {{ gift.name }}">
-                  {# <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="{{ asset('/uploads/reindeers/0c783d4036aabf5952329468830bd63b.png') }}" alt="photo de {{ gift.name }}" /> #}
-    
-                  <h3 class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-25 text-white px-3 py-1 mt-5 mb-0">{{ gift.name }}</h3>
-                </div>
+                  <img class="position-absolute" src="{{ asset('/uploads/reindeers/1b6b13630db8344e29afbed0c6c54477.png') }}" alt="photo de {{ gift.name }}" />
+                {% endif %}
+
+                {# <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="{{ asset('/uploads/reindeers/0c783d4036aabf5952329468830bd63b.png') }}" alt="photo de {{ gift.name }}" /> #}
+
+                <h3 class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-25 text-white px-3 py-1 mt-5 mb-0">{{ gift.name }}</h3>
+              </div>
             </a>
           {% endfor %}
         </div>

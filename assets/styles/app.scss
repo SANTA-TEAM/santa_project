@@ -181,7 +181,7 @@ a.CTA {
   align-items: center;
   box-shadow: 0 3px 1px rgba(0, 0, 0, .7);
   transition: box-shadow .25s ease-in-out;
-  
+
   &:hover {
     box-shadow: 0 3px 10px rgba(0, 0, 0, .7);
     transition: box-shadow .25s ease-in-out;
@@ -213,3 +213,30 @@ a.CTA {
     box-shadow: none;
   }
 }
+
+.snow {
+
+  width: 5px;
+  height: 5px;
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  background: white;
+  border-radius: 50%;
+  z-index: 10000;
+
+  animation: snowflake 5s linear forwards;
+}
+
+
+// animation 
+
+@keyframes snowflake {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 100vh;
+  }
+}
+

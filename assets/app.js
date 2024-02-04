@@ -9,6 +9,7 @@
 import { data } from 'jquery';
 import './styles/app.scss';
 import 'bootstrap/dist/js/bootstrap.bundle';
+// import { set } from 'core-js/core/dict';
 
 const giftForm = document.getElementById('giftForm');
 const fields = document.querySelectorAll('#giftForm select');
@@ -20,6 +21,7 @@ const idCat = document.getElementById('gift_filter_category');
 const giftContainer = document.getElementById('gift-list');
 let removeButton = document.querySelectorAll('.remove-gift');
 
+const dom = document.querySelector('html');
 
 fields.forEach((field) => {
   field.addEventListener('change', (e) => {
@@ -40,7 +42,6 @@ fields.forEach((field) => {
       category: category
     };
 
-    console.log(body);
     const fetchResponse = fetch(url, {
       method: 'POST',
       headers: {
@@ -49,14 +50,12 @@ fields.forEach((field) => {
       body: JSON.stringify(body)
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((datas) => {
-        console.log(datas);
+
         giftList.innerHTML = '';
         for (data of datas) {
-          console.log(data);
           let html = document.createElement('div');
           html.classList.add('p-2', 'col-6', 'col-md-4');
           html.innerHTML = `
@@ -78,7 +77,6 @@ fields.forEach((field) => {
 removeButton.forEach((clickedButton) => {
   clickedButton.addEventListener('click', () => {
     const url = '/letter';
-    console.log(url);
     let cart = [];
 
     const body = {};
@@ -98,16 +96,52 @@ removeButton.forEach((clickedButton) => {
       body: JSON.stringify(body)
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .then((datas) => {
-        console.log(datas)
         clickedButton.parentElement.remove();
       })
-      .then(() => { 
-        removeButton = document.querySelectorAll('.remove-gift') 
-        console.log(removeButton)
+      .then(() => {
+        removeButton = document.querySelectorAll('.remove-gift')
       })
   })
 })
+
+
+
+const snowConfig = () => {
+
+  const snow = document.createElement('div');
+  snow.classList.add('snow');
+
+  let positionX = Math.random() * window.innerWidth;
+  snow.style.left = positionX + 'px';
+  dom.append(snow);
+}
+
+
+
+const resetSnow = (e) => {
+  const position = window.getComputedStyle(e);
+  const positionY = parseInt(position.getPropertyValue('top'));
+  const windowHeight = window.innerHeight;
+
+  if (positionY >= windowHeight) {
+    e.remove();
+  }
+};
+
+
+
+const fallingSnow = () => {
+  const snowElements = document.querySelectorAll('.snow');
+  snowElements.forEach((e) => { resetSnow(e) })
+
+  if (snowElements.length < 100) {
+    snowConfig();
+  }
+};
+
+setInterval(fallingSnow, 250);
+
+

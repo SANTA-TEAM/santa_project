@@ -9,14 +9,14 @@
 
         {{ form_start(form, { attr: { class: 'row d-flex justify-content-between', id: 'giftForm' } }) }}
         <fieldset class="col-6 col-md-4">
-          <legend class="fs-5">Filtres</legend>
+          <legend class="fs-6 text-white">Filtres</legend>
           {{ form_widget(form.age) }}
           {{ form_widget(form.category) }}
         </fieldset>
         <fieldset class="col-6 col-md-4 d-flex flex-column align-items-end">
-          <legend class="fs-5 text-end">Trier par</legend>
+          <legend class="fs-6 text-end text-white">Trier par</legend>
           {{ form_widget(form.order) }}
-          <a class="fs-6 w-100 d-inline-block text-end" href="{{ path('app_gift') }}">Réinitialiser</a>
+          <a class="fs-6 w-100 d-inline-block text-end text-white text-decoration-underline fw-bold" href="{{ path('app_gift') }}">Réinitialiser</a>
         </fieldset>
         {{ form_end(form) }}
 
@@ -33,7 +33,7 @@
 
                 {# <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="{{ asset('/uploads/reindeers/0c783d4036aabf5952329468830bd63b.png') }}" alt="photo de {{ gift.name }}" /> #}
 
-                <h3 class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-25 text-white px-3 py-1 mt-5 mb-0">{{ gift.name }}</h3>
+                <span class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-75 text-white px-3 py-1 mt-5 mb-0">{{ gift.name }}</span>
               </div>
             </a>
           {% endfor %}

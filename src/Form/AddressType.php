@@ -20,17 +20,17 @@ class AddressType extends AbstractType
     {
         $builder
             ->add('street_name', TextType::class, [
-                'label' => 'Nom de la rue',
+                'label' => 'Nom de rue',
                 'attr' => [
                     'placeholder' => 'Rue de la Paix',
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                 ]
             ])
             ->add('street_number', TextType::class, [
                 'label' => 'Numéro de rue',
                 'attr' => [
                     'placeholder' => '42',
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                 ]
             ])
             ->add('department', EntityType::class, [
@@ -38,7 +38,7 @@ class AddressType extends AbstractType
                 'class' => Department::class,
                 'choice_label' => 'name',
                 'attr' => [
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                 ],
                 'mapped' => false,
             ])
@@ -48,7 +48,7 @@ class AddressType extends AbstractType
             //     'choice_label' => 'name',
             //     'attr' => [
             //         'placeholder' => '42',
-            //         'class' => 'form-control m-2',
+            //         'class' => 'form-control my-2',
             //     ]
             // ])
         ;
@@ -69,7 +69,7 @@ class AddressType extends AbstractType
             //         'class' => City::class,
             //         'choice_label' => 'name',
             //         'attr' => [
-            //             'class' => 'form-control m-2',
+            //             'class' => 'form-control my-2',
             //         ],
             //         'query_builder' => function ($city) use ($department) {
             //             return $city->createQueryBuilder('c')

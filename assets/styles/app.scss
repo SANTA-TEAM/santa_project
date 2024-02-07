@@ -7,6 +7,17 @@ $gold: #FFD700;
   font-family: "Krub", sans-serif;
 }
 
+html {
+  position: relative;
+}
+
+body {
+  background: url('../../public/assets/images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
 .handwrite,
 h1,
 h2,
@@ -200,7 +211,12 @@ a.CTA {
 
 .glow {
   color: white;
-  text-shadow: 0 0 20px $gold;
+  text-shadow: 
+  0 0 10px $gold,
+  0 0 5px $gold,
+  0 0 5px $gold,
+  0 0 10px $gold,
+  ;
   stroke: $gold 1px solid;
 }
 
@@ -214,18 +230,42 @@ a.CTA {
   }
 }
 
-.snow {
+#snow-container {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;  
+  pointer-events: none;
+  z-index: 5;
+}
 
-  width: 5px;
-  height: 5px;
+.snow {
+  top: 0;
+  width: 2px;
+  height: 2px;
   position: absolute;
-  top: 200px;
-  left: 200px;
   background: white;
   border-radius: 50%;
   z-index: 10000;
-
-  animation: snowflake 5s linear forwards;
+  box-shadow: 
+  0 0 1px white,
+  0 0 1px white,
+  0 0 1px white,
+  0 0 1px white,
+  0 0 2px white,
+  0 0 2px white,
+  0 0 2px white,
+  0 0 2px white,
+  0 0 5px white,
+  0 0 5px white,
+  0 0 5px white,
+  0 0 5px white,
+  0 0 10px white,
+  0 0 10px white,
+  0 0 10px white,
+  0 0 10px white
+  ;
+  animation: snowflake 10s linear forwards;
+  transition: left .5s linear;
 }
 
 
@@ -233,10 +273,48 @@ a.CTA {
 
 @keyframes snowflake {
   from {
-    top: 0%;
+    top: 0;
   }
+  
   to {
-    top: 100vh;
+    top: 100%;
   }
 }
 
+#count {
+  color: $secondary!important;
+  font-weight: bold;
+  font-size: 3.5em;
+
+  @media screen and (min-width: 768px) {
+    font-size: 5.5em;
+  }
+  @media screen and (min-width: 1024px) {
+    font-size: 7em;
+  }
+}
+
+#letter_writer {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+form label {
+  color: white;
+  font-weight: bold;
+  width: 100%;
+}
+
+form input,
+form textarea,
+form select {
+  background: rgba(255, 255, 255, .85)!important;
+}
+
+form textarea {
+  height: 200px;
+  @media screen and (min-width: 768px) {
+    height: 350px!important;
+  }
+}

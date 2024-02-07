@@ -22,30 +22,30 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('title', ChoiceType::class, [
-                'label' => 'Titre du message',
+                'label' => 'Objet',
                 'choices' => [
                     'J\'aime le Père Noël' => 'love',
                     'J\'ai un problème avec le Père Noël' => 'issue',
                 ],
                 'attr' => [
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                 ],
             ])
             ->add('content', TextareaType::class, [
                 'label' => 'Message',
                 'attr' => [
                     'placeholder' => 'Il était une fois...',
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                     'rows' => 5,
                 ],
             ])
             ->add('writer', UserType::class, [
-                'label' => 'Auteur',
+                'label' => false,
             ]) //Imbriquation du formulaire user
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
                 'attr' => [
-                    'class' => 'btn bg-white text-secondary rounded-5 m-2 px-4 py-2 text-uppercase fw-bold',
+                    'class' => 'btn bg-white text-secondary rounded-5 my-2 px-4 py-2 text-uppercase fw-bold',
                 ],
             ]);
 

@@ -23,27 +23,26 @@ class UserType extends AbstractType
                 'label' => 'Prénom',
                 'attr' => [
                     'placeholder' => 'John',
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                 ]
-
             ])
             ->add('last_name', TextType::class, [
                 'label' => 'Nom',
                 'attr' => [
                     'placeholder' => 'Doe',
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                 ]
             ])
             ->add('email', EmailType::class, [
                 'label' => 'E-mail',
                 'attr' => [
                     'placeholder' => 'john@doe.com',
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                 ]
             ])
 
             ->add('address', AddressType::class, [
-                'label' => 'Adresse',
+                'label' => false,
             ]); //Imbriquation du formulaire address;           
     }
 

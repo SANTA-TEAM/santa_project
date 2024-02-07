@@ -9,7 +9,7 @@
 import { data } from 'jquery';
 import './styles/app.scss';
 import 'bootstrap/dist/js/bootstrap.bundle';
-// import { set } from 'core-js/core/dict';
+
 
 const giftForm = document.getElementById('giftForm');
 const fields = document.querySelectorAll('#giftForm select');
@@ -21,7 +21,13 @@ const idCat = document.getElementById('gift_filter_category');
 const giftContainer = document.getElementById('gift-list');
 let removeButton = document.querySelectorAll('.remove-gift');
 
-const dom = document.querySelector('html');
+const dom = document.querySelector('#snow-container');
+
+// Date counter
+let now = new Date();
+let nextXmas = new Date('2022-12-25 00:00:00');
+const timeUpdate = 10000;
+const count = document.getElementById('count');
 
 fields.forEach((field) => {
   field.addEventListener('change', (e) => {
@@ -108,7 +114,7 @@ removeButton.forEach((clickedButton) => {
 })
 
 
-
+// falling snow settings 
 const snowConfig = () => {
 
   const snow = document.createElement('div');
@@ -119,29 +125,76 @@ const snowConfig = () => {
   dom.append(snow);
 }
 
-
-
 const resetSnow = (e) => {
   const position = window.getComputedStyle(e);
   const positionY = parseInt(position.getPropertyValue('top'));
-  const windowHeight = window.innerHeight;
+  const windowHeight = dom.clientHeight;
 
   if (positionY >= windowHeight) {
     e.remove();
   }
 };
 
-
-
 const fallingSnow = () => {
   const snowElements = document.querySelectorAll('.snow');
-  snowElements.forEach((e) => { resetSnow(e) })
+  snowElements.forEach((e) => { 
+    resetSnow(e) 
+  })
 
-  if (snowElements.length < 100) {
+  if (snowElements.length < 200) {
     snowConfig();
   }
 };
 
 setInterval(fallingSnow, 250);
+
+
+// date counter settings
+const update = (i) => {
+
+  while (now > nextXmas) {
+    nextXmas.setYear(nextXmas.getFullYear() + 1);
+  }
+
+  // get time : 
+  let hours = 23 - now.getHours();
+  let minutes = 60 - now.getMinutes();
+  let days = nextXmas.getDate() - now.getDate();
+  let months = nextXmas.getMonth() - now.getMonth();
+
+  if (days < 0) {
+    if ((now.getMonth() + 1) === 2) { // february
+      days = 28 - Math.abs(days);
+    } else if (
+      (now.getMonth() + 1) == 1 ||
+      (now.getMonth() + 1) == 3 ||
+      (now.getMonth() + 1) === 5 ||
+      (now.getMonth() + 1) === 7 ||
+      (now.getMonth() + 1) === 8 ||
+      (now.getMonth() + 1) === 10 ||
+      (now.getMonth() + 1) === 12) { // 31 days months
+      days = 31 - Math.abs(days);
+    } else { // 30 days months
+      days = 30 - Math.abs(days);
+    }
+    months = 12;
+    months = months - 1;
+  }
+
+
+
+  let counter = "";
+  counter += (months != 0) ? months + " mois " : '';
+  counter += (days != 0) ? days + " jours <br /> " : '';
+  counter += (hours != 0) ? hours + " heures " : '';
+  counter += (minutes != 0) ? minutes + " minutes " : '';
+
+  count.innerHTML = counter;
+  i++;
+  setTimeout(() => { update(i) }, timeUpdate)
+}
+
+
+update(1);
 
 

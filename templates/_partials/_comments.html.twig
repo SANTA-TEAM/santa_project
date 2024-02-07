@@ -1,8 +1,8 @@
 <div id="carouselComment" class="carousel slide" style="max-height: 300px;">
   <div class="carousel-inner h-100">
     {% for comment in comments %}
-      <div class="col-12 col-md-4 px-5 carousel-item {% if loop.index == 1 %}active{% endif %}">
-        <div class="bg-white bg-opacity-75 px-5 py-3 rounded mx-5">
+      <div class="col-12 col-md-4 px-0 px-md-5 carousel-item {% if loop.index == 1 %}active{% endif %}">
+        <div class="bg-white bg-opacity-75 px-3 px-md-5 py-3 rounded mx-2">
           <p class="fst-italic">"{{ comment.content }}"</p>
           <p class="text-end text-capitalize fs-4 handwrite">{{ comment.userName }}</p>
         </div>

@@ -12009,6 +12009,17 @@ textarea.form-control-lg {
   font-family: "Krub", sans-serif;
 }
 
+html {
+  position: relative;
+}
+
+body {
+  background: url("../../public/assets/images/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
 .handwrite,
 h1,
 .h1,
@@ -12184,7 +12195,7 @@ a.CTA:hover {
 
 .glow {
   color: white;
-  text-shadow: 0 0 20px #FFD700;
+  text-shadow: 0 0 10px #FFD700, 0 0 5px #FFD700, 0 0 5px #FFD700, 0 0 10px #FFD700;
   stroke: #FFD700 1px solid;
 }
 
@@ -12196,23 +12207,74 @@ a.CTA:hover {
   box-shadow: none;
 }
 
+#snow-container {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  pointer-events: none;
+  z-index: 5;
+}
+
 .snow {
-  width: 5px;
-  height: 5px;
+  top: 0;
+  width: 2px;
+  height: 2px;
   position: absolute;
-  top: 200px;
-  left: 200px;
   background: white;
   border-radius: 50%;
   z-index: 10000;
-  animation: snowflake 5s linear forwards;
+  box-shadow: 0 0 1px white, 0 0 1px white, 0 0 1px white, 0 0 1px white, 0 0 2px white, 0 0 2px white, 0 0 2px white, 0 0 2px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 10px white, 0 0 10px white, 0 0 10px white, 0 0 10px white;
+  animation: snowflake 10s linear forwards;
+  transition: left 0.5s linear;
 }
 
 @keyframes snowflake {
   from {
-    top: 0%;
+    top: 0;
   }
   to {
-    top: 100vh;
+    top: 100%;
+  }
+}
+#count {
+  color: #ED2626 !important;
+  font-weight: bold;
+  font-size: 3.5em;
+}
+@media screen and (min-width: 768px) {
+  #count {
+    font-size: 5.5em;
+  }
+}
+@media screen and (min-width: 1024px) {
+  #count {
+    font-size: 7em;
+  }
+}
+
+#letter_writer {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+form label {
+  color: white;
+  font-weight: bold;
+  width: 100%;
+}
+
+form input,
+form textarea,
+form select {
+  background: rgba(255, 255, 255, 0.85) !important;
+}
+
+form textarea {
+  height: 200px;
+}
+@media screen and (min-width: 768px) {
+  form textarea {
+    height: 350px !important;
   }
 }/*# sourceMappingURL=app.css.map */

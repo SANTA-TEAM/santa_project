@@ -4,7 +4,7 @@
   <section class="py-5">
     <div class="container">
       <div class="row">
-        <h2 class="text-gold text-center fs-1 glow">20 jours avant Noël</h2>
+        <h2 id="count" class="text-gold text-center glow">20 jours <br> avant Noël</h2>
       </div>
     </div>
   </section>
@@ -19,8 +19,8 @@
 
   <section class="py-5">
     <div class="container">
-      <div class="row">
-        <img class="col-12 col-md-4" src="{{ asset('uploads/reindeers/0c783d4036aabf5952329468830bd63b.png') }}" alt="image de Noël" aria-landmark="image de Noël" title="image de Noël" />
+      <div class="row px-2 px-md-0">
+        <img class="col-12 col-md-4 px-0" src="{{ asset('uploads/reindeers/0c783d4036aabf5952329468830bd63b.png') }}" alt="image de Noël" aria-landmark="image de Noël" title="image de Noël" />
         <div class="bg-white bg-opacity-75 col-12 col-md-8 p-3">
           <h3 class="fs-1 text-secondary">La fête de Noël</h3>
           <p>Noël est une fête spéciale célébrant la naissance de Jésus. Les enfants décorent des sapins, reçoivent 
@@ -35,16 +35,7 @@
     <div class="container">
       <div class="row">
         <h3 class="glow fs-1">Les histoires de Noël</h3>
-
         {% include '_partials/_comments.html.twig' %}
-        {# {% for comment in comments %}
-          <div class="col-12 col-md-4 p-1">
-            <div class="bg-white bg-opacity-75 p-3 rounded">
-              <p class="fst-italic">"{{ comment.content }}"</p>
-              <p class="text-end text-capitalize fs-4 handwrite">{{ comment.userName }}</p>
-            </div>
-          </div>
-        {% endfor %} #}
       </div>
     </div>
   </section>

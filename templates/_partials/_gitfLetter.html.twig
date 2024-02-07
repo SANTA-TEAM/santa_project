@@ -1,10 +1,18 @@
-<div class="d-flex p-1 justify-content-between align-items-center my-2 border border-secondary" style="height: 100px;">
-  <div class="text d-flex align-items-center h-100 w-auto">
-    <h3 class="me-4">{{ gift.name }}</h3>
-    {% for image in gift.Images %}
-      <img class="object-fit-contain h-100 md-md-0 col-md-6" src="{{ asset('uploads/gifts/' ~ image.fileName) }}" alt="photo de {{ gift.name }}" />
-    {% endfor %}
-  </div>
+<div class="col-12 col-md-6 col-lg-4 px-2">
+  <div class="w-100 bg-white bg-opacity-75 d-flex p-2 justify-content-between align-items-center my-2 rounded-2 col-12 col-md-6 col-lg-4" style="height: 75px;">
+    <div class="text d-flex align-items-center h-100 w-auto">
+      {% for image in gift.Images %}
+        <img style="width: 15%;" class="object-fit-contain rounded-circle" src="{{ asset('uploads/gifts/' ~ image.fileName) }}" alt="photo de {{ gift.name }}" />
+      {% endfor %}
+      <span class="mx-2">{{ gift.name }}</span>
+    </div>
 
-  <button type="button" id="{{ gift.id }}" class="remove-gift btn btn-danger">Supprimer de ma lettre</button>
+    <button type="button" id="{{ gift.id }}" class="remove-gift btn btn-danger rounded-circle">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+      </svg>
+    </button>
+  </div>
 </div>
+

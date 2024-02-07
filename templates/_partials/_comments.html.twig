@@ -2,18 +2,32 @@
   <div class="carousel-inner h-100">
     {% for comment in comments %}
       <div class="col-12 col-md-4 px-0 px-md-5 carousel-item {% if loop.index == 1 %}active{% endif %}">
-        <div class="bg-white bg-opacity-75 px-3 px-md-5 py-3 rounded mx-2">
+        <div class="bg-white bg-opacity-75 px-3 px-md-5 py-3 mx-5 rounded mx-2">
           <p class="fst-italic">"{{ comment.content }}"</p>
           <p class="text-end text-capitalize fs-4 handwrite">{{ comment.userName }}</p>
         </div>
       </div>
     {% endfor %}
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselComment" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      {# <span class="carousel-control-prev-icon" aria-hidden="true"> #}
+      <span class="" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 -960 960 960" width="50">
+        <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/>
+      </svg>
+      </span>
       <span class="visually-hidden">Previous</span>
     </button>
     <button class="carousel-control-next" type="button" data-bs-target="#carouselComment" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      {# <span class="carousel-control-next-icon" aria-hidden="true"> #}
+      <span class="" aria-hidden="true">
+
+      
+
+      <svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 -960 960 960" width="50">
+        <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
+      </svg>
+
+      </span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>

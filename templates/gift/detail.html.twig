@@ -13,7 +13,7 @@
   <section class="py-5">
     <div class="container">
       <div class="row">
-        <h2 class="glow">{{ gift.name }}</h2>
+        <h2 class="glow mb-5">{{ gift.name }}</h2>
         {% for image in gift.Images %}
           <img class="col-12 my-5 md-md-0 col-md-6 object-fit-cover" src="{{ asset('uploads/gifts/' ~ image.fileName) }}" alt="photo de {{ gift.name }}" />
         {% endfor %}

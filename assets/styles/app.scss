@@ -318,3 +318,9 @@ form textarea {
     height: 350px!important;
   }
 }
+
+
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(100%);
+}

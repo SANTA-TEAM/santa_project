@@ -32,15 +32,15 @@ class ContactController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()){
 
             $message = $form->getData();
-            $user = $userRepository->findOneBy(['email' => $form->get('writer')->getData()]);
+            $user = $userRepository->findOneBy(['email' => $form->get('writer')->get('email')->getData()]);
 
             if (!$user) {
                 $user = new User();
                 $user = $message->getWriter();
+                $addressRepository->save($user->getAddress()); // persist address on cascade ?
+                $userRepository->save($user);
             }
             
-            $addressRepository->save($user->getAddress()); // persist address on cascade ?
-            $userRepository->save($user);
             $messageRepository->save($message);
 
             $this->addFlash('success', 'Votre message a bien été envoyé');

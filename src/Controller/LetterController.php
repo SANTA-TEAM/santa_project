@@ -69,8 +69,6 @@ class LetterController extends AbstractController
         $formLetter->handleRequest($request);
 
         if ($formLetter->isSubmitted() && $formLetter->isValid()) {
-
-
             // useless ? 
             foreach ($letter as $giftId) {
                 $gift = $giftRepository->findOneBy(['id' => $giftId]);
@@ -92,6 +90,8 @@ class LetterController extends AbstractController
             $newLetter->setWriter($user);
 
             $letterRepository->save($newLetter);
+            $newLetter = null;
+            $session->clear();
 
             $this->addFlash('success', 'Tu as bien envoyé ta lettre !');
             return $this->redirectToRoute('app_letter');

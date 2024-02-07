@@ -12277,4 +12277,9 @@ form textarea {
   form textarea {
     height: 350px !important;
   }
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+  filter: invert(100%);
 }/*# sourceMappingURL=app.css.map */

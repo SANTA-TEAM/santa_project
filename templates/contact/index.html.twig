@@ -1,15 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-  Hello ContactController!
-{% endblock %}
-
 {% block main %}
   <section class="py-5">
     <div class="container">
       {{ form_start(form) }}
       <div class="row">
-        <h2 class="text-center fs-1 glow">Envoyer un message au Père Noël</h2>
+        <h2 class="text-center fs-1 glow mb-5">Envoyer un message au Père Noël</h2>
         <div class="col-12 col-lg-6 mx-lg-0">
           {{ form_row(form.writer) }}
       </div>

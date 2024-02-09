@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Gift;
 use App\Entity\User;
 use App\Entity\Letter;
 use App\Form\LetterType;
@@ -10,6 +9,8 @@ use App\Repository\GiftRepository;
 use App\Repository\UserRepository;
 use App\Repository\LetterRepository;
 use App\Repository\CategoryRepository;
+use App\Services\rgpd;
+use ContainerB43INe1\getRgpdService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +28,13 @@ class LetterController extends AbstractController
         UserRepository $userRepository,
         GiftRepository $giftRepository,
         LetterRepository $letterRepository,
-        SessionInterface $session
+        SessionInterface $session,
+        rgpd $rgpd
     ): Response {
 
+        // delete after 1 year
+        $rgpd->deleteUser();
+        
         $letter = $session->get('letter');
 
         if (!$letter) {
@@ -41,7 +46,7 @@ class LetterController extends AbstractController
 
         // if fetch for update gifts in letter (delete)
         if ($request->isMethod('POST') && $request->headers->get('Content-Type') === 'application/json') {
-            
+
             $json = $request->getContent();
             $requestData = json_decode($json, true);
 
@@ -62,7 +67,7 @@ class LetterController extends AbstractController
                 $newLetter->addGift($gift);
                 $gifts[] = $gift;
             }
-        }       
+        }
 
 
         $formLetter = $this->createForm(LetterType::class, $newLetter);

@@ -9,6 +9,7 @@ use App\Form\GiftFilterType;
 use App\Repository\AgeRepository;
 use App\Repository\GiftRepository;
 use App\Repository\CategoryRepository;
+use App\Services\rgpd;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,7 +25,11 @@ class GiftController extends AbstractController
         CategoryRepository $categoryRepository,
         AgeRepository $ageRepository,
         Request $request,
+        rgpd $rgpd
     ): Response {
+        // delete after 1 year
+        $rgpd->deleteUser();
+
         $gifts = $giftRepository->findGiftsWithImages();
 
         $categories = $categoryRepository->findAll();
@@ -57,8 +62,12 @@ class GiftController extends AbstractController
         GiftRepository $giftRepository,
         CategoryRepository $categoryRepository,
         AgeRepository $ageRepository,
-        Request $request
+        Request $request,
+        rgpd $rgpd
     ) {
+        // delete after 1 year
+        $rgpd->deleteUser();
+
         $json = $request->getContent();
 
         $requestData = json_decode($json, true);
@@ -75,13 +84,17 @@ class GiftController extends AbstractController
 
         $giftsArray = [];
         foreach ($gifts as $gift) {
+            $imageArray = [];
+            foreach($gift->getImages() as $image) {
+                $imageArray[] = $image->getFileName();
+            }
             $giftsArray[] = [
                 'id' => $gift->getId(),
                 'name' => $gift->getName(),
                 'description' => $gift->getDescription(),
                 'age' => $gift->getAge()->getAge(),
                 'category' => $gift->getCategory()->getName(),
-                'images' => $gift->getImages()
+                'images' => $imageArray
             ];
         }
 
@@ -93,8 +106,13 @@ class GiftController extends AbstractController
     #[Route('/cadeau/{slug}', name: 'app_gift_detail', methods: ['GET'])]
     public function detail(
         GiftRepository $giftRepository,
+        rgpd $rgpd,
         string $slug
     ): Response {
+
+        // delete after 1 year
+        $rgpd->deleteUser();
+
         $gift = $giftRepository->findOneBy(['slug' => $slug]);
 
         return $this->render('gift/detail.html.twig', [
@@ -115,8 +133,10 @@ class GiftController extends AbstractController
         if (!$letter) {
             $letter = [];
         }
-        $letter [] = $gift->getId();
-        $session->set('letter', $letter);
+        if(!in_array($gift->getId(), $letter)) {
+            $letter[] = $gift->getId();
+            $session->set('letter', $letter);
+        }
 
 
         $this->addFlash('success', 'Le cadeau a bien été ajouté à votre lettre');

@@ -1,9 +1,13 @@
 <div class="col-12 col-md-6 col-lg-4 px-2">
   <div class="w-100 bg-white bg-opacity-75 d-flex p-2 justify-content-between align-items-center my-2 rounded-2 col-12 col-md-6 col-lg-4" style="height: 75px;">
     <div class="text d-flex align-items-center h-100 w-auto">
-      {% for image in gift.Images %}
-        <img style="width: 15%;" class="object-fit-contain rounded-circle" src="{{ asset('uploads/gifts/' ~ image.fileName) }}" alt="photo de {{ gift.name }}" />
-      {% endfor %}
+      {% if gift.images is not empty %}
+        <img style="width: 15%; aspect-ratio: 1;" class="object-fit-cover rounded-circle h-auto" src="{{ asset('/uploads/gifts/' ~ (gift.images|first)) }}" alt="photo de {{ gift.name }}" />
+      {% else %}
+        <img style="width: 15%; aspect-ratio: 1;" class="object-fit-cover rounded-circle h-auto" src="{{ asset('/uploads/gifts/x-masGift.jpg') }}" alt="image par défaut de cadeau" />
+      {% endif %}
+
+
       <span class="mx-2">{{ gift.name }}</span>
     </div>
 
@@ -15,4 +19,3 @@
     </button>
   </div>
 </div>
-

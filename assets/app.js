@@ -62,13 +62,18 @@ fields.forEach((field) => {
 
         giftList.innerHTML = '';
         for (data of datas) {
+          if(!data.images[0]) {
+            data.images[0] = 'x-masGift.jpg'
+          }
+          console.log(data.images);
+
           let html = document.createElement('div');
           html.classList.add('p-2', 'col-6', 'col-md-4');
           html.innerHTML = `
 
               <div style="height: 200px;" class="position-relative rounded-1">
-                <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="uploads/reindeers/0c783d4036aabf5952329468830bd63b.png" alt="photo de {{ gift.name }}" />
-                <h3 class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-25 text-white px-3 py-1 mt-5 mb-0"> ${data.name}</h3>
+                <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="uploads/gifts/${data.images[0]}" alt="photo de ${data.name}" />
+                <span class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-75 text-white px-3 py-1 mt-5 mb-0"> ${data.name}</span>
               `;
           const giftList = document.getElementById('giftList');
           giftList.append(html);
@@ -105,7 +110,7 @@ removeButton.forEach((clickedButton) => {
         return res.json();
       })
       .then((datas) => {
-        clickedButton.parentElement.remove();
+        clickedButton.parentElement.parentElement.remove();
       })
       .then(() => {
         removeButton = document.querySelectorAll('.remove-gift')

@@ -20,9 +20,9 @@
   <section class="py-5">
     <div class="container">
       <div class="row px-2 px-md-0">
-        <img class="col-12 col-md-4 px-0" src="{{ asset('uploads/reindeers/0c783d4036aabf5952329468830bd63b.png') }}" alt="image de Noël" aria-landmark="image de Noël" title="image de Noël" />
+        <img class="col-12 col-md-4 px-0" src="{{ asset('assets/images/xmasStory.jpg') }}" alt="image de Noël" aria-landmark="image de Noël" title="image de Noël" />
         <div class="bg-white bg-opacity-75 col-12 col-md-8 p-3">
-          <h3 class="fs-1 text-secondary">La fête de Noël</h3>
+          <h3 class="fs-1 text-secondary text-center">La fête de Noël</h3>
           <p>Noël est une fête spéciale célébrant la naissance de Jésus. Les enfants décorent des sapins, reçoivent 
             des cadeaux du Père Noël, mangent des friandises et partagent des moments heureux en famille pour répandre 
             la magie et la joie dans le monde.</p>
@@ -34,7 +34,7 @@
   <section class="py-5">
     <div class="container">
       <div class="row">
-        <h3 class="glow fs-1">Les histoires de Noël</h3>
+        <h3 class="glow fs-1 text-center">Les histoires de Noël</h3>
         {% include '_partials/_comments.html.twig' %}
       </div>
     </div>
@@ -43,11 +43,13 @@
   <section class="py-5">
     <div class="container">
       <div class="row">
-        <h3 class="glow fs-1">Ajouter une histoire de Noël</h3>
-        {{ form_start(form) }}
-        {{ form_row(form.user_name) }}
-        {{ form_row(form.content) }}
-        {{ form_end(form) }}
+        <div class="col-12 col-md-6 mx-md-auto">
+          <h3 class="glow fs-1 text-center">Ajouter une histoire de Noël</h3>
+          {{ form_start(form) }}
+          {{ form_row(form.user_name) }}
+          {{ form_row(form.content) }}
+          {{ form_end(form) }}
+        </div>
       </div>
     </div>
   </section>

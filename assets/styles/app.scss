@@ -43,8 +43,6 @@ body {
 
 main {
   flex: 1;
-  // background: red !important;
-  // overflow-y: scroll;
 }
 
 .text-gold {
@@ -220,6 +218,17 @@ a.CTA {
   stroke: $gold 1px solid;
 }
 
+.shadow {
+  color: white;
+  text-shadow: 
+  0 0 10px black,
+  0 0 5px black,
+  0 0 5px black,
+  0 0 10px black,
+  ;
+  stroke: $gold 1px solid;
+}
+
 .reindeers {
   box-shadow: 0 0 20px $gold;
 }
@@ -262,8 +271,7 @@ a.CTA {
   0 0 10px white,
   0 0 10px white,
   0 0 10px white,
-  0 0 10px white
-  ;
+  0 0 10px white;
   animation: snowflake 10s linear forwards;
   transition: left .5s linear;
 }
@@ -284,13 +292,13 @@ a.CTA {
 #count {
   color: $secondary!important;
   font-weight: bold;
-  font-size: 3.5em;
+  font-size: 3em;
 
   @media screen and (min-width: 768px) {
-    font-size: 5.5em;
+    font-size: 4.5em;
   }
   @media screen and (min-width: 1024px) {
-    font-size: 7em;
+    font-size: 6em;
   }
 }
 
@@ -323,4 +331,8 @@ form textarea {
 .carousel-control-next,
 .carousel-control-prev /*, .carousel-indicators */ {
     filter: invert(100%);
+}
+
+.object-fit-end {
+  object-position: right;
 }

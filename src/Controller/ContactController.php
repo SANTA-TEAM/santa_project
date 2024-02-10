@@ -9,12 +9,10 @@ use App\Form\MessageType;
 use App\Repository\UserRepository;
 use App\Repository\AddressRepository;
 use App\Repository\MessageRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 
 class ContactController extends AbstractController
 {
@@ -42,6 +40,7 @@ class ContactController extends AbstractController
                 $addressRepository->save($user->getAddress()); // persist address on cascade ?
                 $userRepository->save($user);
             }
+            
             $message = $form->getData();
             $message->setWriter($user);
 

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
-use App\Repository\UserRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ReindeersRepository;
 use App\Services\rgpd;
@@ -22,7 +21,7 @@ class HomeController extends AbstractController
         Request $request,
         rgpd $rgpd
     ): Response {
-
+        
         // delete after 1 year
         $rgpd->deleteUser();
 
@@ -40,7 +39,8 @@ class HomeController extends AbstractController
 
 
         $reindeers = $reindeersRepository->findAll();
-        $comments = $commentRepository->findAll();
+        $comments = $commentRepository->findBy(['is_valid' => true]);
+
         return $this->render('home/index.html.twig', [
             'reindeers' => $reindeers,
             'comments' => $comments,

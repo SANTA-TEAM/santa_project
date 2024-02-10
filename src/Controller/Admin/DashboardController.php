@@ -22,6 +22,12 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
+
+        if (!$this->isGranted('ROLE_ADMIN') && !$this->isGranted('ROLE_DWARF')) {
+
+            return $this->redirectToRoute('app_login');
+        }
+
         return $this->render('admin/dashboard.html.twig');
     }
 
@@ -34,11 +40,11 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        
         // access only Santa user
-        // if ($this->isGranted('ROLE_ADMIN'))
-        // {
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
-        // }
+        if ($this->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-users', User::class);
+        }
         yield MenuItem::linkToCrud('Lettres', 'fas fa-envelope', Letter::class);
         yield MenuItem::linkToCrud('Messagerie', 'fas fa-comment', Message::class);
         yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);

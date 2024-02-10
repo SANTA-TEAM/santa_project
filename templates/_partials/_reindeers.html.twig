@@ -1,20 +1,36 @@
-<div id="carouselReindeers" class="carousel slide" style="max-height: 300px;">
+<div id="carouselReindeers" class="carousel slide" style="height: 300px;">
   <div class="carousel-inner h-100">
     {% for reindeer in reindeers %}
-      <div class="h-100 col-12 col-md-6 col-lg-4 z-1 p-2 carousel-item {% if reindeer.name == 'Rudolph' %}active{% endif %}">
-        <img src="{{ asset('uploads/reindeers/' ~ reindeer.getFileName) }}" alt="photot de {{ reindeer.name }}" class="w-100 h-100 top-0 start-0 z-n1 w-100 h-100 object-fit-cover" />
-        <div class="text-start text-white carousel-caption d-none d-md-block w-50">
-          <h3 class="fs-1 fw-bold glow">{{ reindeer.name }}</h3>
-          <p>{{ reindeer.story }}</p>
+      <div class="h-100 col-12 col-md-6 col-lg-4 z-1 p-2 carousel-item {% if reindeer.name == 'Rudolph' %}active{% endif %} px-5">
+        <div class="d-flex flex-row-reverse justify-content-center w-100 h-100 align-items-center px-5">
+          {% if reindeer.fileName %}
+            <img src="{{ asset('uploads/reindeers/' ~ reindeer.getFileName) }}" alt="image du renne de {{ reindeer.name }}" class="z-n1 w-auto h-100 object-fit-contain object-position-end" />
+          {% else %}
+            <img src="{{ asset('assets/images/reindeer.jpg') }}" alt="photot de {{ reindeer.name }}" class="z-n1 w-25 h-100 object-fit-contain" />
+          {% endif %}
+          <div class="text-start text-white carousel-caption d-none d-md-block w-75 h-100 position-static pe-2">
+            <h3 class="fs-1 fw-bold glow">{{ reindeer.name }}</h3>
+            <p>{{ reindeer.story }}</p>
+          </div>
         </div>
       </div>
     {% endfor %}
+
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselReindeers" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="w-auto" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 -960 960 960" width="50">
+          <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
+        </svg>
+      </span>
       <span class="visually-hidden">Previous</span>
     </button>
+
     <button class="carousel-control-next" type="button" data-bs-target="#carouselReindeers" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="w-auto" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" height="50" viewBox="0 -960 960 960" width="50">
+          <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z" />
+        </svg>
+      </span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>

@@ -15,7 +15,6 @@ class DepartmentCrudController extends AbstractCrudController
         return Department::class;
     }
 
-    
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('name', 'Nom');

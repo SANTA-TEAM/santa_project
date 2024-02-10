@@ -10,14 +10,12 @@ use App\Repository\UserRepository;
 use App\Repository\LetterRepository;
 use App\Repository\CategoryRepository;
 use App\Services\rgpd;
-use ContainerB43INe1\getRgpdService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
 
 class LetterController extends AbstractController
 {
@@ -41,7 +39,6 @@ class LetterController extends AbstractController
             $letter = [];
         }
 
-        $category = $categoryRepository->findAll();
         $gift = $giftRepository->findAll();
 
         // if fetch for update gifts in letter (delete)
@@ -68,7 +65,6 @@ class LetterController extends AbstractController
                 $gifts[] = $gift;
             }
         }
-
 
         $formLetter = $this->createForm(LetterType::class, $newLetter);
         $formLetter->handleRequest($request);
@@ -107,42 +103,4 @@ class LetterController extends AbstractController
             'gifts' => $gifts
         ]);
     }
-
-    // #[Route('/lettre/cadeaux/supprimer/{id}', name: 'app_letter_update', methods: ['GET'])]
-    // public function removeGift(
-    //     SessionInterface $session,
-    //     GiftRepository $giftRepository,
-    //     int $id
-    // ): Response {
-
-    //     $letter = $session->get('letter');
-
-    //     $gift = $giftRepository->findOneBy(['id' => $id]);
-    //     // dd($letter);
-
-    //     foreach ($letter as $giftId) {
-    //         $gift = $giftRepository->findOneBy(['id' => $giftId]);
-    //         $letter->addGift($gift);
-    //     }
-
-
-    //     if ($letter) {
-    //         $letter->removeGift($gift);
-    //     }
-    //     $letterGifts = [];
-
-    //     foreach ($letter->getGift() as $gift) {
-    //         $letterGifts[] = [
-    //             'id' => $gift->getId(),
-    //             'name' => $gift->getName(),
-    //             'category' => $gift->getCategory(),
-    //             'age' => $gift->getAge(),
-    //             'images' => $gift->getImages()
-    //         ];
-    //     }
-
-    //     $letterGifts = new JsonResponse($letterGifts);
-
-    //     return $letterGifts;
-    // }
 }

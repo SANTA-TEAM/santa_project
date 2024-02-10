@@ -21,7 +21,7 @@ class Gift
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(inversedBy: 'gifts', fetch:'EAGER', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'gifts', fetch:'EAGER', cascade: ['persist'])]
     private ?Age $age = null;
 
     #[ORM\Column]
@@ -39,7 +39,7 @@ class Gift
     #[ORM\ManyToMany(targetEntity: Letter::class, mappedBy: 'gift', cascade: ['persist'])]
     private Collection $letters;
 
-    #[ORM\ManyToOne(inversedBy: 'gifts', fetch:'EAGER', cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(inversedBy: 'gifts', fetch:'EAGER', cascade: ['persist'])]
     private ?Category $category = null;
 
     #[ORM\Column(length: 255)]

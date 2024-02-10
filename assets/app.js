@@ -24,7 +24,7 @@ let removeButton = document.querySelectorAll('.remove-gift');
 const dom = document.querySelector('#snow-container');
 
 // Date counter
-let now = new Date();
+
 let nextXmas = new Date('2022-12-25 00:00:00');
 const timeUpdate = 10000;
 const count = document.getElementById('count');
@@ -62,17 +62,18 @@ fields.forEach((field) => {
 
         giftList.innerHTML = '';
         for (data of datas) {
-          if(!data.images[0]) {
-            data.images[0] = 'x-masGift.jpg'
+          if (!data.images[0]) {
+            data.images = 'assets/images/x-masGift.jpg'
+          } else {
+            data.images = `uploads/gifts/${data.images[0]}`
           }
-          console.log(data.images);
 
           let html = document.createElement('div');
           html.classList.add('p-2', 'col-6', 'col-md-4');
           html.innerHTML = `
 
               <div style="height: 200px;" class="position-relative rounded-1">
-                <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="uploads/gifts/${data.images[0]}" alt="photo de ${data.name}" />
+                <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="${data.images}" alt="photo de ${data.name}" />
                 <span class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-75 text-white px-3 py-1 mt-5 mb-0"> ${data.name}</span>
               `;
           const giftList = document.getElementById('giftList');
@@ -142,8 +143,8 @@ const resetSnow = (e) => {
 
 const fallingSnow = () => {
   const snowElements = document.querySelectorAll('.snow');
-  snowElements.forEach((e) => { 
-    resetSnow(e) 
+  snowElements.forEach((e) => {
+    resetSnow(e)
   })
 
   if (snowElements.length < 200) {
@@ -156,6 +157,7 @@ setInterval(fallingSnow, 250);
 
 // date counter settings
 const update = (i) => {
+  const now = new Date();
 
   while (now > nextXmas) {
     nextXmas.setYear(nextXmas.getFullYear() + 1);
@@ -182,7 +184,7 @@ const update = (i) => {
     } else { // 30 days months
       days = 30 - Math.abs(days);
     }
-    months = 12;
+
     months = months - 1;
   }
 

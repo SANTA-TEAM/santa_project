@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         {# create a partial and use include with a for loop #}
-        <h2 class="glow fs-1 text-center mb-5">La chambre aux cadeaux</h2>
+        <h2 class="shadow fs-1 text-center mb-5">La chambre aux cadeaux</h2>
 
         {{ form_start(form, { attr: { class: 'row d-flex justify-content-between', id: 'giftForm' } }) }}
         <fieldset class="col-6 col-md-4">
@@ -22,12 +22,12 @@
 
         <div id="giftList" class="row p-1 m-0">
           {% for gift in gifts %}
-            <a class="d-inline-block p-2 col-6 col-md-4" href="{{ path('app_gift_detail', { slug: gift.slug }) }}">
+            <a class="d-inline-block p-3 col-6 col-md-4" href="{{ path('app_gift_detail', { slug: gift.slug }) }}">
               <div style="height: 200px;" class="position-relative rounded-2 overflow-hidden">
                 {% if gift.images is not empty %}
                   <img class="position-absolute object-fit-cover w-100 h-100" src="{{ asset('/uploads/gifts/' ~ (gift.images|first)) }}" alt="photo de {{ gift.name }}" />
                 {% else %}
-                  <img class="position-absolute object-fit-cover w-100 h-100" src="{{ asset('/uploads/gifts/x-masGift.jpg') }}" alt="image par défaut de cadeau" />
+                  <img class="position-absolute object-fit-cover w-100 h-100" src="{{ asset('/assets/images/x-masGift.jpeg') }}" alt="image par défaut de cadeau" />
                 {% endif %}
                 <span class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-75 text-white px-3 py-1 mt-5 mb-0">{{ gift.name }}</span>
               </div>

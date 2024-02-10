@@ -3,7 +3,7 @@
 {% block main %}
   <section class="py-5">
     <div class="container">
-      <h2 class="text-center fs-1 glow mb-5">Envoie ta lettre au Père Noël</h2>
+      <h2 class="text-center fs-1 shadow mb-5">Envoie ta lettre au Père Noël</h2>
 
       {{ form_start(form) }}
       <div class="row">
@@ -15,7 +15,7 @@
           {{ form_row(form.text) }}
         </div>
         <div class="my-5">
-          <h3 class="fs-1 text-center glow text-gold">Ma liste de cadeaux</h3>
+          <h3 class="fs-1 text-center shadow shadow1 text-gold">Ma liste de cadeaux</h3>
           <div id="gift-list" class="row">
             {% for gift in gifts %}
               {% include '_partials/_gitfLetter.html.twig' %}

@@ -28,9 +28,6 @@ class GiftCrudController extends AbstractCrudController
         yield CollectionField::new('images')
             ->setEntryType(GiftImagesType::class)
             ->onlyOnForms();
-        // yield CollectionField::new('images')
-        //     ->setTemplatePath('admin/gift/images/gifts')
-        //     ->onlyOnDetail();
     }
 
 }

@@ -138,7 +138,6 @@ class GiftController extends AbstractController
             $session->set('letter', $letter);
         }
 
-
         $this->addFlash('success', 'Le cadeau a bien été ajouté à votre lettre');
         return $this->redirectToRoute('app_gift');
     }

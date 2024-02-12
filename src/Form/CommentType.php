@@ -22,7 +22,7 @@ class CommentType extends AbstractType
                 'label' => 'Commentaire',
                 'attr' => [
                     'placeholder' => 'Il était une fois...',
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                     'rows' => 5,
                 ],
             ])
@@ -30,13 +30,13 @@ class CommentType extends AbstractType
                 'label' => 'Pseudo',
                 'attr' => [
                     'placeholder' => 'John Doe',
-                    'class' => 'form-control m-2',
+                    'class' => 'form-control my-2',
                 ],
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
                 'attr' => [
-                    'class' => 'btn bg-white text-secondary rounded-5 m-2 px-4 py-2 text-uppercase fw-bold',
+                    'class' => 'btn bg-white text-secondary rounded-5 my-2 px-4 py-2 text-uppercase fw-bold',
                 ],
             ])
         ;

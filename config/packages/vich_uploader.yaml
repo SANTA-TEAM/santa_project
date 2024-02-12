@@ -6,3 +6,7 @@ vich_uploader:
            uri_prefix: /uploads/gifts
            upload_destination: '%kernel.project_dir%/public/uploads/gifts'
            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+       reindeer:
+           uri_prefix: /uploads/reindeers
+           upload_destination: '%kernel.project_dir%/public/uploads/reindeers'
+           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

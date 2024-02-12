@@ -2,9 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ReindeersRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ReindeersRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: ReindeersRepository::class)]
 class Reindeers
 {
@@ -25,7 +29,11 @@ class Reindeers
     #[ORM\Column(length: 255)]
     private ?string $story = null;
 
-    #[ORM\Column(length: 255)]
+
+    #[Vich\UploadableField(mapping: 'reindeer', fileNameProperty: 'file_name')]
+    private ?File $file = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $file_name = null;
 
     public function __construct()
@@ -87,12 +95,28 @@ class Reindeers
         return $this;
     }
 
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file = null): static
+    {
+        $this->file = $file;
+
+        if ($file) {
+            $this->updated_at = new DateTimeImmutable();
+        }
+        
+        return $this;
+    }
+
     public function getFileName(): ?string
     {
         return $this->file_name;
     }
 
-    public function setFileName(string $file_name): static
+    public function setFileName(?string $file_name): static
     {
         $this->file_name = $file_name;
 

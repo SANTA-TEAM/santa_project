@@ -3,11 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Reindeers;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ReindeersCrudController extends AbstractCrudController
@@ -22,10 +21,12 @@ class ReindeersCrudController extends AbstractCrudController
     {
         yield TextField::new('name');
         yield TextareaField::new('story');
-        yield TextField::new('file_name');
+        yield TextField::new('file')
+            ->setFormType(VichImageType::class)
+            ->onlyOnForms();
         yield ImageField::new('file_name')
-        ->setBasePath('/uploads/reindeers/')
-        ->setUploadDir('public/uploads/reindeers/');
+            ->onlyOnIndex()
+            ->setBasePath('/uploads/reindeers/')
+            ->setUploadDir('public/uploads/reindeers/');
     }
-
 }

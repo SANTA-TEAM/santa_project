@@ -3,19 +3,27 @@
 {% block main %}
   <section class="py-5">
     <div class="container">
-      <div class="row">
-        {{ form_start(form) }}
-        {{ form_row(form.title) }}
-        {{ form_row(form.text) }}
-        {{ form_row(form.writer) }}
+      <h2 class="text-center fs-1 shadow mb-5">Envoie ta lettre au Père Noël</h2>
 
-        <div id="gift-list">
-          {% for gift in gifts %}
-            {% include '_partials/_gitfLetter.html.twig' %}
-          {% endfor %}
+      {{ form_start(form) }}
+      <div class="row">
+        <div class="col-12 col-lg-6 mx-0">
+          {{ form_row(form.writer) }}
         </div>
-        {{ form_end(form) }}
+        <div class="col-12 col-lg-6 mx-0 py-2">
+          {{ form_row(form.title) }}
+          {{ form_row(form.text) }}
+        </div>
+        <div class="my-5">
+          <h3 class="fs-1 text-center shadow shadow1 text-gold">Ma liste de cadeaux</h3>
+          <div id="gift-list" class="row">
+            {% for gift in gifts %}
+              {% include '_partials/_gitfLetter.html.twig' %}
+            {% endfor %}
+          </div>
+        </div>
       </div>
+      {{ form_end(form) }}
     </div>
   </section>
 {% endblock %}

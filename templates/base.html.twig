@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <title>
       {% block title %}
-        Welcome!
+        Le Village du Père Noël
       {% endblock %}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta lang="fr">
+    <meta name="title" content="Le village du Père Noël">
+    <meta name="description" content="Écris ta lettre au Père Noël et ajoute les cadeaux que tu souhaites trouver sous le sapin">
+    <meta name="author" content="Christopher BICHON, Nathalia Derny, Julien Degermann">
+    <meta name="keywords" content="Noël, Père, lutins, cadeau, liste, lettre, histoire">
+    
+    <meta property="og:title" content="Le village du Père Noël">
+    <meta property="og:author" content="Christopher BICHON, Nathalia Derny, Julien DEGERMANN">
+    <meta property="og:description" content="Écris ta lettre au Père Noël et ajoute les cadeaux que tu souhaites trouver sous le sapin">
+    <meta property="og:keywords" content="Noël, Père, lutins, cadeau, liste, lettre, histoire">
+    <meta property="og:image" content="{{ asset('assets/images/blablabike.webp') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://le-village-du-pere-noel.julien-degermann.fr">    
+    
+    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" />
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>" />
     {% block stylesheets %}
       {{ encore_entry_link_tags('app') }}
     {% endblock %}
@@ -19,6 +33,8 @@
     {% endblock %}
   </head>
   <body>
+    <div id="snow-container">
+    </div>
     <header class="bg-white p-3 navbar navbar-expand-lg navbar-light">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center w-100">
@@ -32,7 +48,7 @@
           {% include '/_partials/_navbar.html.twig' %}
       </div>
     </header>
-    <main>
+    <main class="position-relative">
       {% include '_partials/_addflash.html.twig' %}
       {% block main %}
 
@@ -43,18 +59,18 @@
         <div class="row">
           <p>Ce site a été développé par</p>
           
-          {# <ul>
+          <ul>
             <li>
-              <a title="lien vers le GitHub de BICHON Christopher" aria-label="lien vers le GitHub de BICHON Christopher" href="https://krystdev.fr/">BICHON Christopher</a>
+              <a  target="_blank" title="lien vers le site web de Christopher BICHON" aria-label="lien vers le site web de Christopher BICHON" href="https://krystdev.fr/">Christopher BICHON</a>
             </li>
             <li>
-              <a title="lien vers le GitHub de Nathalia" aria-label="lien vers le GitHub de Nathalia" href="#">Nathalia</a>
+              <a  target="_blank" title="lien vers le GitHub de Nathalia DERNY" aria-label="lien vers le GitHub de Nathalia DERNY" href="https://github.com/NathaliaDerny">Nathalia DERNY</a>
             </li>
             <li>
-              <a title="lien vers le GitHub de DEGERMANN Julien" aria-label="lien vers le GitHub de DEGERMANN Julien" href="https://julien-degermann.fr/">DEGERMANN Julien</a>
+              <a target="_blank" title="lien vers le site web de Julien DEGERMANN" aria-label="lien vers le site web de Julien DEGERMANN" href="https://julien-degermann.fr/">Julien DEGERMANN</a>
             </li>
           </ul>
-           #}
+          
         </div>
       </div>
     </footer>

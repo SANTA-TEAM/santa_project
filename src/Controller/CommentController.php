@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\rgpd;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -15,9 +16,12 @@ class CommentController extends AbstractController
     #[Route('/comment', name: 'app_comment')]
     public function index(
         Request $request,
-        EntityManagerInterface $entityManager): Response
-    {
-
+        rgpd $rgpd,
+        EntityManagerInterface $entityManager
+    ): Response {
+        // delete after 1 year
+        $rgpd->deleteUser();
+        
         $comment = new Comment();
         $formComment = $this->createForm(CommentType::class, $comment);
         $formComment->handleRequest($request);

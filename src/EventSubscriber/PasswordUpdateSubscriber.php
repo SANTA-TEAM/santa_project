@@ -7,6 +7,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 
 class PasswordUpdateSubscriber implements EventSubscriberInterface
 {
@@ -24,7 +26,7 @@ class PasswordUpdateSubscriber implements EventSubscriberInterface
             BeforeEntityUpdatedEvent::class => 'onBeforeEntityPersistedEvent',
         ];
     }
-    
+
     public function onBeforeEntityPersistedEvent(BeforeEntityUpdatedEvent|BeforeEntityPersistedEvent $event): void
     {
         $entity = $event->getEntityInstance();
@@ -32,10 +34,10 @@ class PasswordUpdateSubscriber implements EventSubscriberInterface
         if (!($entity instanceof User)) {
             return;
         }
-
-        if (!is_null($entity->getPlainPassword()) && !empty($entity->getPlainPassword())) {
+        if (!is_null($entity->getPassword()) && !empty($entity->getPassword())) {
             $entity->setPassword(
-                $this->passwordHasher->hashPassword($entity, $entity->getPlainPassword()));
+                $this->passwordHasher->hashPassword($entity, $entity->getPassword())
+            );
         }
     }
 }

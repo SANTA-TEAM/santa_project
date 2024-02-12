@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+  {% if error %}
+    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+  {% endif %}
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <h2 class="fs-1 shadow text-center">Connexion</h2>
+        <form method="post">
+          <label class="py-2" for="username">
+            E-mail
+            <input type="email" value="{{ last_username }}" name="_username" id="username" class="my-2 p-2 form-control" autocomplete="email" required autofocus />
+          </label>
+          <label class="py-2" for="password">
+            Mot de passe
+            <input type="password" name="_password" id="password" class="my-2 p-2 form-control" autocomplete="current-password" required />
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+          </label>
+
+          <div class="checkbox mb-3">
+            <label><input type="checkbox" name="_remember_me" />Remember me</label>
+          </div>
+
+          <button class="CTA px-4 py-2" type="submit">Se connecter</button>
+        </form>
+      </div>
+    </div>
+  </section>
+{% endblock %}

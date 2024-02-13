@@ -1,3 +1,4 @@
+import './bootstrap.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -22,6 +23,11 @@ const giftContainer = document.getElementById('gift-list');
 let removeButton = document.querySelectorAll('.remove-gift');
 
 const dom = document.querySelector('#snow-container');
+
+
+const department = document.querySelector('.department');
+const cityDropdown = document.querySelector('.ts-dropdown-content');
+
 
 // Date counter
 
@@ -201,7 +207,35 @@ const update = (i) => {
   setTimeout(() => { update(i) }, timeUpdate)
 }
 
+if (count) {
+  update(1);
+}
 
-update(1);
+if (department) {
+  department.addEventListener('change', () => {
+    console.log(department.value);
+    const url = '/letter';
+    console.log(url);
+    const body = {
+      'department': parseInt(department.value)
+    }
 
+    console.log(body);
+    const fetchResponse = fetch(
+      url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .then((datas) => {
+        console.log(datas);
+      })
+  })
+}
 

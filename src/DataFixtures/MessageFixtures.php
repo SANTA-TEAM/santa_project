@@ -22,7 +22,6 @@ class MessageFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($message);
         }
         
-
         $manager->persist($message);
 
         $manager->flush();

@@ -57,7 +57,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $user->setAddress($address);
             $this->addReference('user_' . $i, $user);
 
-
             $manager->persist($user);
         }
 

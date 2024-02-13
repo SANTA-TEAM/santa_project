@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Letter;
+use App\Services\rgpd;
 use App\Form\LetterType;
+use App\Repository\CityRepository;
 use App\Repository\GiftRepository;
 use App\Repository\UserRepository;
 use App\Repository\LetterRepository;
 use App\Repository\CategoryRepository;
-use App\Services\rgpd;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +23,6 @@ class LetterController extends AbstractController
     #[Route('/letter', name: 'app_letter', methods: ['POST', 'GET'])]
     public function index(
         Request $request,
-        CategoryRepository $categoryRepository,
         UserRepository $userRepository,
         GiftRepository $giftRepository,
         LetterRepository $letterRepository,
@@ -32,7 +32,7 @@ class LetterController extends AbstractController
 
         // delete after 1 year
         $rgpd->deleteUser();
-        
+
         $letter = $session->get('letter');
 
         if (!$letter) {
@@ -58,6 +58,7 @@ class LetterController extends AbstractController
         $newLetter = new Letter;
         $gifts = [];
 
+        
         if ($letter != []) {
             foreach ($letter as $giftId) {
                 $gift = $giftRepository->findOneBy(['id' => $giftId]);
@@ -70,11 +71,6 @@ class LetterController extends AbstractController
         $formLetter->handleRequest($request);
 
         if ($formLetter->isSubmitted() && $formLetter->isValid()) {
-            // useless ? 
-            foreach ($letter as $giftId) {
-                $gift = $giftRepository->findOneBy(['id' => $giftId]);
-                $newLetter->addGift($gift);
-            }
 
             // letter's author : check if exist before create
             $email = $formLetter->get('writer')->get('email')->getData();

@@ -3,14 +3,16 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Services\Slugify;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -67,20 +69,31 @@ class UserCrudController extends AbstractCrudController
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
                 return $action->setLabel('Modifier et retourner à la liste');
             })
-            ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE)
-            ;
+            ->remove(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE);
+    }
+
+    public function __construct(private Slugify $slugify)
+    {
     }
 
     public function configureFields(string $pageName): iterable
     {
         yield EmailField::new('email');
         yield TextField::new('password')->onlyOnForms();
-        yield ChoiceField::new('roles', 'Rôles')->setChoices([
-            'Admin' => 'ROLE_ADMIN',
-            'Nain' => 'ROLE_DWARF',
-        ])->allowMultipleChoices();
+        yield ChoiceField::new('roles', 'Rôles')
+            ->setChoices([
+                'Admin' => 'ROLE_ADMIN',
+                'Nain' => 'ROLE_DWARF',
+            ])
+            ->allowMultipleChoices()
+            ->onlyOnForms();
         yield TextField::new('first_name', 'Prénom');
         yield TextField::new('last_name', 'Nom');
-        yield NumberField::new('age', 'Age');
+        yield NumberField::new('age', 'Age')->hideOnIndex();
+        yield AssociationField::new('address', 'Adresse');
+        // yield AssociationField::new('address', 'Adresse')
+        //     ->formatValue(function ($entity) {
+        //         return $entity->getStreetNumber() . ' ' . $entity->getStreetName() . ' ' . $entity->getCity()->getZipCode() . ' ' . $this->slugify->slugify($entity->getCity());
+        //     });
     }
 }

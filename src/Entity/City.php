@@ -25,6 +25,9 @@ class City
     #[ORM\JoinColumn(nullable: false)]
     private ?Department $department = null;
 
+    #[ORM\Column(length: 10)]
+    private ?string $insee_code = null;
+
     #[ORM\OneToMany(mappedBy: 'city', targetEntity: Address::class)]
     private Collection $addresses;
 
@@ -103,6 +106,19 @@ class City
 
         return $this;
     }
+
+    public function getInseeCode(): ?string
+    {
+        return $this->insee_code;
+    }
+
+    public function setInseeCode(string $insee_code): static
+    {
+        $this->insee_code = $insee_code;
+
+        return $this;
+    }
+
     public function __toString(): string
     {
         return (string) $this->name;

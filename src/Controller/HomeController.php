@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Repository\CityRepository;
 use App\Repository\CommentRepository;
 use App\Repository\ReindeersRepository;
 use App\Services\rgpd;
@@ -21,7 +22,7 @@ class HomeController extends AbstractController
         Request $request,
         rgpd $rgpd
     ): Response {
-        
+
         // delete after 1 year
         $rgpd->deleteUser();
 

@@ -2,22 +2,28 @@
 
 namespace App\Form;
 
-use App\Entity\City;
 use App\Entity\Address;
-
+use App\Services\Slugify;
 use App\Entity\Department;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
+use App\Form\CityAutocompleteType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class AddressType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options): void
+    public function __construct(private Slugify $slugify)
     {
+        $this->slugify = $slugify;
+    }
+
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    ): void {
         $builder
             ->add('street_name', TextType::class, [
                 'label' => 'Nom de rue',
@@ -33,53 +39,12 @@ class AddressType extends AbstractType
                     'class' => 'form-control my-2',
                 ]
             ])
-            ->add('department', EntityType::class, [
-                'label' => 'Département',
-                'class' => Department::class,
-                'choice_label' => 'name',
+            ->add('city', CityAutocompleteType::class, [
                 'attr' => [
                     'class' => 'form-control my-2',
                 ],
-                'mapped' => false,
-            ])
-            // ->add('city', EntityType::class, [
-            //     'class' => City::class,
-            //     'label' => 'Ville',
-            //     'choice_label' => 'name',
-            //     'attr' => [
-            //         'placeholder' => '42',
-            //         'class' => 'form-control my-2',
-            //     ]
-            // ])
-        ;
 
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $address = $event->getData();
-            $form = $event->getForm();
-            
-            if (!$address) {
-                return;
-            }
-            
-            // $department = $address->getDepartment();
-
-            // if ($department) {
-            //     $form->add('city', EntityType::class, [
-            //         'label' => 'Ville',
-            //         'class' => City::class,
-            //         'choice_label' => 'name',
-            //         'attr' => [
-            //             'class' => 'form-control my-2',
-            //         ],
-            //         'query_builder' => function ($city) use ($department) {
-            //             return $city->createQueryBuilder('c')
-            //                 ->where('c.department = :department')
-            //                 ->setParameter('department', $department->getAddress()->getDepartment());
-            //         },
-            //         'mapped' => false,
-            //     ]);
-            // }
-        });
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

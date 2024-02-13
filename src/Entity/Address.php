@@ -100,7 +100,12 @@ class Address
                 $child->setAddress(null);
             }
         }
-
         return $this;
+    }
+
+
+    public function __toString(): string
+    {
+        return $this->street_number . ' ' . $this->street_name . ' ' . $this->city;
     }
 }

@@ -6,6 +6,7 @@ use App\Entity\City;
 use App\Entity\Gift;
 use App\Entity\User;
 use App\Entity\Letter;
+use App\Entity\Address;
 use App\Entity\Comment;
 use App\Entity\Message;
 use App\Entity\Category;

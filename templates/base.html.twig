@@ -7,21 +7,21 @@
         Le Village du Père Noël
       {% endblock %}
     </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta lang="fr">
-    <meta name="title" content="Le village du Père Noël">
-    <meta name="description" content="Écris ta lettre au Père Noël et ajoute les cadeaux que tu souhaites trouver sous le sapin">
-    <meta name="author" content="Christopher BICHON, Nathalia Derny, Julien Degermann">
-    <meta name="keywords" content="Noël, Père, lutins, cadeau, liste, lettre, histoire">
-    
-    <meta property="og:title" content="Le village du Père Noël">
-    <meta property="og:author" content="Christopher BICHON, Nathalia Derny, Julien DEGERMANN">
-    <meta property="og:description" content="Écris ta lettre au Père Noël et ajoute les cadeaux que tu souhaites trouver sous le sapin">
-    <meta property="og:keywords" content="Noël, Père, lutins, cadeau, liste, lettre, histoire">
-    <meta property="og:image" content="{{ asset('assets/images/blablabike.webp') }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://le-village-du-pere-noel.julien-degermann.fr">    
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta lang="fr" />
+    <meta name="title" content="Le village du Père Noël" />
+    <meta name="description" content="Écris ta lettre au Père Noël et ajoute les cadeaux que tu souhaites trouver sous le sapin" />
+    <meta name="author" content="Christopher BICHON, Nathalia Derny, Julien Degermann" />
+    <meta name="keywords" content="Noël, Père, lutins, cadeau, liste, lettre, histoire" />
+
+    <meta property="og:title" content="Le village du Père Noël" />
+    <meta property="og:author" content="Christopher BICHON, Nathalia Derny, Julien DEGERMANN" />
+    <meta property="og:description" content="Écris ta lettre au Père Noël et ajoute les cadeaux que tu souhaites trouver sous le sapin" />
+    <meta property="og:keywords" content="Noël, Père, lutins, cadeau, liste, lettre, histoire" />
+    <meta property="og:image" content="{{ asset('assets/images/blablabike.webp') }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://le-village-du-pere-noel.julien-degermann.fr" />
+
     <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" />
 
     {% block stylesheets %}
@@ -33,8 +33,7 @@
     {% endblock %}
   </head>
   <body>
-    <div id="snow-container">
-    </div>
+    <div id="snow-container"></div>
     <header class="bg-white p-3 navbar navbar-expand-lg navbar-light">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center w-100">
@@ -42,10 +41,9 @@
             <img src="{{ asset('assets/images/logo.png') }}" class="h-auto m-2" alt="logo du village du Père Noël" title="logo du village du Père Noël" />
             <h1 class="text-dark m-0 fs-4">Le Village du <br /> <span class="fs-3 fw-bold text-secondary">Père Noël</span></h1>
           </a>
-          <button class="navbar-toggler border-0 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span></button>
-          </div>
-          {% include '/_partials/_navbar.html.twig' %}
+          <button class="navbar-toggler border-0 d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        </div>
+        {% include '/_partials/_navbar.html.twig' %}
       </div>
     </header>
     <main class="position-relative">
@@ -58,19 +56,17 @@
       <div class="container">
         <div class="row">
           <p>Ce site a été développé par</p>
-          
           <ul>
-            <li>
-              <a  target="_blank" title="lien vers le site web de Christopher BICHON" aria-label="lien vers le site web de Christopher BICHON" href="https://krystdev.fr/">Christopher BICHON</a>
-            </li>
-            <li>
-              <a  target="_blank" title="lien vers le GitHub de Nathalia DERNY" aria-label="lien vers le GitHub de Nathalia DERNY" href="https://github.com/NathaliaDerny">Nathalia DERNY</a>
-            </li>
             <li>
               <a target="_blank" title="lien vers le site web de Julien DEGERMANN" aria-label="lien vers le site web de Julien DEGERMANN" href="https://julien-degermann.fr/">Julien DEGERMANN</a>
             </li>
+            <li>
+              <a target="_blank" title="lien vers le site web de Christopher BICHON" aria-label="lien vers le site web de Christopher BICHON" href="https://krystdev.fr/">Christopher BICHON</a>
+            </li>
+            <li>
+              <a target="_blank" title="lien vers le GitHub de Nathalia DERNY" aria-label="lien vers le GitHub de Nathalia DERNY" href="https://github.com/NathaliaDerny">Nathalia DERNY</a>
+            </li>
           </ul>
-          
         </div>
       </div>
     </footer>

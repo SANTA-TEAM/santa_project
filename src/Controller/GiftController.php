@@ -65,9 +65,6 @@ class GiftController extends AbstractController
         Request $request,
         rgpd $rgpd
     ) {
-        // delete after 1 year
-        $rgpd->deleteUser();
-
         $json = $request->getContent();
 
         $requestData = json_decode($json, true);
@@ -76,17 +73,17 @@ class GiftController extends AbstractController
         $age = $requestData['age'] === 'null' ? null : $requestData['age'];
         $category = $requestData['category'] === 'null' ? null : $requestData['category'];
 
-
         $age = $age === null ? null : $ageRepository->findOneBy(['id' => $age]);
         $category = $category === null ? null : $categoryRepository->findOneBy(['id' => $category]);
 
         $gifts = $giftRepository->filter($age, $category, $order);
-
         $giftsArray = [];
         foreach ($gifts as $gift) {
             $imageArray = [];
-            foreach($gift->getImages() as $image) {
-                $imageArray[] = $image->getFileName();
+            if ($gift->getImages() !== null) {
+                foreach ($gift->getImages() as $image) {
+                    $imageArray[] = $image->getFileName();
+                }
             }
             $giftsArray[] = [
                 'id' => $gift->getId(),
@@ -94,7 +91,8 @@ class GiftController extends AbstractController
                 'description' => $gift->getDescription(),
                 'age' => $gift->getAge()->getAge(),
                 'category' => $gift->getCategory()->getName(),
-                'images' => $imageArray
+                'images' => $imageArray,
+                // 'slug' => $gift->getSlug()
             ];
         }
 
@@ -133,7 +131,7 @@ class GiftController extends AbstractController
         if (!$letter) {
             $letter = [];
         }
-        if(!in_array($gift->getId(), $letter)) {
+        if (!in_array($gift->getId(), $letter)) {
             $letter[] = $gift->getId();
             $session->set('letter', $letter);
         }

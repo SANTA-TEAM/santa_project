@@ -10,7 +10,7 @@ class AgeFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $ages= [3, 7, 12, 16, 18];
+        $ages= [3, 5, 6, 8, 10, 12, 14, 16, 18];
 
         foreach ($ages as $key => $age) {
             $age = (new Age())

@@ -24,11 +24,6 @@ let removeButton = document.querySelectorAll('.remove-gift');
 
 const dom = document.querySelector('#snow-container');
 
-
-const department = document.querySelector('.department');
-const cityDropdown = document.querySelector('.ts-dropdown-content');
-
-
 // Date counter
 
 let nextXmas = new Date('2022-12-25 00:00:00');
@@ -54,6 +49,8 @@ fields.forEach((field) => {
       category: category
     };
 
+    console.log(body);
+
     const fetchResponse = fetch(url, {
       method: 'POST',
       headers: {
@@ -68,20 +65,25 @@ fields.forEach((field) => {
 
         giftList.innerHTML = '';
         for (data of datas) {
+          console.log(data);
           if (!data.images[0]) {
-            data.images = 'assets/images/x-masGift.jpg'
+            data.images = 'assets/images/x-masGift.jpeg'
           } else {
             data.images = `uploads/gifts/${data.images[0]}`
           }
 
-          let html = document.createElement('div');
-          html.classList.add('p-2', 'col-6', 'col-md-4');
+          let html = document.createElement('a');
+          html.classList.add('d-inline-block', 'p-3', 'col-6', 'col-md-4');
+          html.href = `/cadeau/${data.slug}`;
           html.innerHTML = `
 
-              <div style="height: 200px;" class="position-relative rounded-1">
-                <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="${data.images}" alt="photo de ${data.name}" />
-                <span class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-75 text-white px-3 py-1 mt-5 mb-0"> ${data.name}</span>
+            <div style="height: 200px;" class="position-relative rounded-1">
+              <img class="z-n1 object-fit-cover top-0 start-0 h-100 w-100 position-absolute" src="${data.images}" alt="photo de ${data.name}" />
+              <span class="position-absolute bottom-0 w-100 start-0 bg-dark bg-opacity-75 text-white px-3 py-1 mt-5 mb-0"> ${data.name}</span>
+            </div>
+
               `;
+
           const giftList = document.getElementById('giftList');
           giftList.append(html);
         }
@@ -194,8 +196,6 @@ const update = (i) => {
     months = months - 1;
   }
 
-
-
   let counter = "";
   counter += (months != 0) ? months + " mois " : '';
   counter += (days != 0) ? days + " jours <br /> " : '';
@@ -210,32 +210,3 @@ const update = (i) => {
 if (count) {
   update(1);
 }
-
-if (department) {
-  department.addEventListener('change', () => {
-    console.log(department.value);
-    const url = '/letter';
-    console.log(url);
-    const body = {
-      'department': parseInt(department.value)
-    }
-
-    console.log(body);
-    const fetchResponse = fetch(
-      url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body)
-    })
-      .then((res) => {
-        console.log(res);
-        return res.json();
-      })
-      .then((datas) => {
-        console.log(datas);
-      })
-  })
-}
-

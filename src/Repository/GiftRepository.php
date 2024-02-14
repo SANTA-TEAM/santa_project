@@ -37,7 +37,7 @@ class GiftRepository extends ServiceEntityRepository
     }
 
 
-    public function filter(Age $age = null, Category $category = null, string $order = null)
+    public function filter(Age|null $age = null, Category|null $category = null, string|null $order = null)
     {
         $qb = $this->createQueryBuilder('g')
             ->leftJoin('g.images', 'i');
